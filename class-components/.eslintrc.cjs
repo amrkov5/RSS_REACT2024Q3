@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true },
+  env: { browser: true, es2021: true },
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
@@ -19,7 +19,7 @@ module.exports = {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
   },
-  plugins: ['react-refresh', 'react-compiler'],
+  plugins: ['react-refresh', 'react-compiler', '@typescript-eslint'],
   rules: {
     'react-refresh/only-export-components': [
       'warn',
@@ -30,5 +30,6 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'prettier/prettier': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
+    'no-console': 'error',
   },
 };
