@@ -2,6 +2,8 @@ module.exports = {
   root: true,
   env: { browser: true, es2021: true },
   extends: [
+    'airbnb',
+    'airbnb-typescript',
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
@@ -30,6 +32,6 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'prettier/prettier': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
-    'no-console': 'error',
+    'react/prefer-stateless-function': 0,
   },
 };
