@@ -1,24 +1,30 @@
 import { Component, ReactNode } from 'react';
+import { InputBlockProps } from '../types';
 
-class InputBlock extends Component<object, { text: string }> {
-  constructor(props: object) {
+class InputBlock extends Component<InputBlockProps, { text: string }> {
+  constructor(props: InputBlockProps) {
     super(props);
+    const { curText } = this.props;
     this.state = {
-      text: '',
+      text: curText,
     };
   }
 
   componentDidMount(): void {
+    const { onTextChange } = this.props;
     const textFromLS: string | null = localStorage.getItem('search');
     if (textFromLS) {
+      onTextChange(textFromLS);
       this.setState({ text: textFromLS });
     }
   }
 
   saveTextToLS(event: React.FormEvent<HTMLFormElement>): void {
     event.preventDefault();
+    const { onTextChange } = this.props;
     const { text } = this.state;
     localStorage.setItem('search', text);
+    onTextChange(text);
   }
 
   render(): ReactNode {
