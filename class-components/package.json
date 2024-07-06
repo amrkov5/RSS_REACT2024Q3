@@ -15,7 +15,7 @@
   "lint-staged": {
     "*.tsx": [
       "prettier --write src/**/*.tsx",
-      "eslint --max-warnings 0 src/**/*.ts"
+      "eslint --max-warnings 0 src/**/*.tsx"
     ],
     "*.ts": [
       "prettier --write src/**/*.tsx",

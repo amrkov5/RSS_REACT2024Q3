@@ -9,8 +9,6 @@ class Header extends Component<GetData, HeaderState> {
     this.state = {
       type: 'people',
       text: '',
-      // isTypeLoaded: false,
-      // isTextLoaded: false,
     };
     this.onTypeChange = this.onTypeChange.bind(this);
     this.onTextChange = this.onTextChange.bind(this);
@@ -39,17 +37,10 @@ class Header extends Component<GetData, HeaderState> {
 
   onTypeChange(type: string) {
     this.setState({ type });
-    // this.setState({ isTypeLoaded: true });
-    // if (isChanged) {
-    //   console.log('clear');
-    //   // localStorage.removeItem('search');
-    //   this.setState({ text: '' });
-    // }
   }
 
   onTextChange(text: string) {
     this.setState({ text });
-    // this.setState({ isTextLoaded: true });
   }
 
   render(): ReactNode {
