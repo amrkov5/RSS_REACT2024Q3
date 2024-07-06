@@ -28,6 +28,9 @@ class InputBlock extends Component<InputBlockProps, { text: string | null }> {
     if (text) {
       localStorage.setItem('search', text.trim());
       onTextChange(text);
+    } else {
+      localStorage.removeItem('search');
+      onTextChange(' ');
     }
   }
 
