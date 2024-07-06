@@ -32,7 +32,7 @@ class ResourceSelector extends Component<
           value={curType}
         >
           <option value="people">People</option>
-          <option value="movies">Movies</option>
+          <option value="films">Movies</option>
           <option value="vehicles">Vehicles</option>
           <option value="planets">Planets</option>
           <option value="species">Species</option>

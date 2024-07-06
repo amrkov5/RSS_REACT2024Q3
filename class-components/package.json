@@ -16,6 +16,10 @@
     "*.tsx": [
       "prettier --write src/**/*.tsx",
       "eslint --max-warnings 0 src/**/*.ts"
+    ],
+    "*.ts": [
+      "prettier --write src/**/*.tsx",
+      "eslint --max-warnings 0 src/**/*.ts"
     ]
   },
   "husky": {

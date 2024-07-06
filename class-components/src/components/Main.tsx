@@ -14,13 +14,19 @@ class Main extends Component<MainProps, { dataToPaint: APIResponse | null }> {
     const { dataToPaint } = this.props;
     return (
       <main className="main">
-        {!dataToPaint && <Loader />}
-        {!this.isNothingFound() && dataToPaint && <NotFoundBlock />}
-        {dataToPaint &&
-          this.isNothingFound() &&
-          dataToPaint.results.map((el) => (
-            <Card data={el} key={Date.parse(String(new Date()))} />
-          ))}
+        <div className="cards-wrapper">
+          {!dataToPaint && <Loader />}
+          {!this.isNothingFound() && dataToPaint && <NotFoundBlock />}
+          {dataToPaint &&
+            this.isNothingFound() &&
+            dataToPaint.results.map((el) => (
+              <Card
+                resource={dataToPaint.resource}
+                data={el}
+                key={Date.parse(el.edited)}
+              />
+            ))}
+        </div>
       </main>
     );
   }

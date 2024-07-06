@@ -7,10 +7,14 @@ async function getAPIData(
 ): Promise<void | APIResponse> {
   const response: APIResponse = await fetch(`${BASE}${type}?search=${text}`)
     .then((resp) => resp.json())
+    .then((data) => {
+      const fullData = data;
+      fullData.resource = type;
+      return fullData;
+    })
     .catch(() => {
       throw new Error('Failed to fetch data.');
     });
-  // console.log('api resp', response);
   return response;
 }
 

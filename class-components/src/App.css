@@ -34,7 +34,27 @@ form {
 }
 .main {
   display: flex;
-  flex-grow: 1;
+  justify-content: center;
+  padding: 20px;
+}
+.cards-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 60px;
+  margin: 0 auto;
+}
+.card {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid gray;
+  align-items: flex-start;
+}
+.card-heading {
+  margin: 0;
+}
+.title-name {
+  color: yellow;
 }
 .loader_wrapper {
   display: inline-block;
@@ -44,7 +64,6 @@ form {
   margin: 0 auto;
   filter: drop-shadow(0 0 1px yellow);
 }
-
 .text {
   position: absolute;
   top: 50%;

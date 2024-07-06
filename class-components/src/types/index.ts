@@ -144,7 +144,7 @@ interface APIResponse {
   count: number;
   next: string | null;
   previous: string | null;
-  resource: string;
+  resource: keyof FieldsToShow;
   results:
     | Movies[]
     | People[]
@@ -153,12 +153,23 @@ interface APIResponse {
     | Vehicles[]
     | Planets[];
 }
+
+type Data = Movies | People | Starships | Species | Vehicles | Planets;
 type APIResults = {
-  data: Movies | People | Starships | Species | Vehicles | Planets;
+  data: Data;
+  resource: keyof FieldsToShow;
 };
 
 type AppState = {
   searchResults: APIResponse | null;
+};
+type FieldsToShow = {
+  films: string[];
+  people: string[];
+  planets: string[];
+  vehicles: string[];
+  species: string[];
+  starships: string[];
 };
 
 export type {
@@ -172,4 +183,6 @@ export type {
   GetData,
   MainProps,
   APIResults,
+  FieldsToShow,
+  Data,
 };
