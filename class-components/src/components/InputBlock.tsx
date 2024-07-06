@@ -1,7 +1,7 @@
 import { Component, ReactNode } from 'react';
 import { InputBlockProps } from '../types';
 
-class InputBlock extends Component<InputBlockProps, { text: string }> {
+class InputBlock extends Component<InputBlockProps, { text: string | null }> {
   constructor(props: InputBlockProps) {
     super(props);
     const { curText } = this.props;
@@ -16,6 +16,8 @@ class InputBlock extends Component<InputBlockProps, { text: string }> {
     if (textFromLS) {
       onTextChange(textFromLS);
       this.setState({ text: textFromLS });
+    } else {
+      onTextChange(' ');
     }
   }
 
@@ -23,8 +25,10 @@ class InputBlock extends Component<InputBlockProps, { text: string }> {
     event.preventDefault();
     const { onTextChange } = this.props;
     const { text } = this.state;
-    localStorage.setItem('search', text);
-    onTextChange(text);
+    if (text) {
+      localStorage.setItem('search', text.trim());
+      onTextChange(text);
+    }
   }
 
   render(): ReactNode {
@@ -36,7 +40,7 @@ class InputBlock extends Component<InputBlockProps, { text: string }> {
         <input
           className="search-input"
           type="text"
-          value={text}
+          value={text || ''}
           onChange={(e) => this.setState({ text: e.target.value })}
         />
         <button type="submit" className="search-btn">

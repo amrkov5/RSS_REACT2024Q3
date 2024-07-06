@@ -10,6 +10,8 @@ class ResourceSelector extends Component<
     const typeFromLS: string | null = localStorage.getItem('type');
     if (typeFromLS) {
       onTypeChange(typeFromLS);
+    } else {
+      onTypeChange('people');
     }
   }
 
@@ -29,7 +31,7 @@ class ResourceSelector extends Component<
           onChange={(e) => {
             this.handleChange(e.target.value);
           }}
-          value={curType}
+          value={curType || 'people'}
         >
           <option value="people">People</option>
           <option value="films">Movies</option>

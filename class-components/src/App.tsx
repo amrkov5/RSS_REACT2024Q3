@@ -15,7 +15,7 @@ class App extends Component<object, AppState> {
 
   async getData(type: string, text: string): Promise<void> {
     this.setState({ searchResults: null });
-    const result: APIResponse | void = await getAPIData(type, text);
+    const result: APIResponse | void = await getAPIData(type, text.trim());
     if (result) {
       this.setState({ searchResults: result });
     }

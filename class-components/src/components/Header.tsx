@@ -7,8 +7,8 @@ class Header extends Component<GetData, HeaderState> {
   constructor(props: GetData) {
     super(props);
     this.state = {
-      type: 'people',
-      text: '',
+      type: null,
+      text: null,
     };
     this.onTypeChange = this.onTypeChange.bind(this);
     this.onTextChange = this.onTextChange.bind(this);
@@ -32,7 +32,9 @@ class Header extends Component<GetData, HeaderState> {
   componentDidUpdate(): void {
     const { getData } = this.props;
     const { type, text } = this.state;
-    getData(type, text);
+    if (type && text) {
+      getData(type, text);
+    }
   }
 
   onTypeChange(type: string) {

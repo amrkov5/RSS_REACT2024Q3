@@ -10,20 +10,18 @@ type GetData = {
 };
 
 type HeaderState = {
-  type: string;
-  text: string;
-  // isTypeLoaded: boolean;
-  // isTextLoaded: boolean;
+  type: string | null;
+  text: string | null;
 };
 
 type ResourceSelectorProps = {
   onTypeChange: (type: string, isChanged?: boolean) => void;
-  curType: string;
+  curType: string | null;
 };
 
 type InputBlockProps = {
   onTextChange: (text: string) => void;
-  curText: string;
+  curText: string | null;
 };
 
 type MainProps = {
