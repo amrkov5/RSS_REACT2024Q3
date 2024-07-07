@@ -1,12 +1,5 @@
 import { ReactNode } from 'react';
 
-type ChangeSearchQuery = {
-  onTextChange: (text: string) => void;
-};
-type ChangeResType = {
-  onTypeChange: (type: string) => void;
-};
-
 type HeaderProps = {
   getData: (type: string, text: string) => void;
   throwFetchError: () => void;
@@ -167,8 +160,8 @@ type APIResults = {
 
 type AppState = {
   searchResults: APIResponse | null;
-  fetchError: null | boolean;
-  wholeAppError: null | boolean;
+  fetchError: boolean;
+  wholeAppError: boolean;
   searchText: string;
   type: string;
 };
@@ -193,11 +186,9 @@ type ErrorBoundaryState = {
 };
 
 export type {
-  ChangeSearchQuery,
   HeaderState,
   APIResponse,
   AppState,
-  ChangeResType,
   ResourceSelectorProps,
   InputBlockProps,
   HeaderProps,
