@@ -1,10 +1,10 @@
 import { Component, ReactNode } from 'react';
-import { GetData, HeaderState } from '../types';
+import { HeaderProps, HeaderState } from '../types';
 import ResourceSelector from './ResourceSelector';
 import InputBlock from './InputBlock';
 
-class Header extends Component<GetData, HeaderState> {
-  constructor(props: GetData) {
+class Header extends Component<HeaderProps, HeaderState> {
+  constructor(props: HeaderProps) {
     super(props);
     this.state = {
       type: null,
@@ -15,7 +15,7 @@ class Header extends Component<GetData, HeaderState> {
   }
 
   shouldComponentUpdate(
-    nextProps: Readonly<GetData>,
+    nextProps: Readonly<HeaderProps>,
     nextState: Readonly<HeaderState>
   ): boolean {
     const { type, text } = this.state;
@@ -38,15 +38,18 @@ class Header extends Component<GetData, HeaderState> {
   }
 
   onTypeChange(type: string) {
-    this.setState({ type });
+    const { updateType } = this.props;
+    this.setState({ type }, () => updateType(type));
   }
 
   onTextChange(text: string) {
-    this.setState({ text });
+    const { updateText } = this.props;
+    this.setState({ text }, () => updateText(text));
   }
 
   render(): ReactNode {
     const { type, text } = this.state;
+    const { throwFetchError, wholeAppError } = this.props;
     return (
       <header className="header">
         <a
@@ -57,8 +60,18 @@ class Header extends Component<GetData, HeaderState> {
         >
           STAR WARS API
         </a>
-        <ResourceSelector onTypeChange={this.onTypeChange} curType={type} />
-        <InputBlock onTextChange={this.onTextChange} curText={text} />
+        <div className="err-wrapper">
+          <button className="err-btn" onClick={throwFetchError} type="button">
+            Fetch Error
+          </button>
+          <button className="err-btn" onClick={wholeAppError} type="button">
+            App Error
+          </button>
+        </div>
+        <div className="search-wrapper">
+          <ResourceSelector onTypeChange={this.onTypeChange} curType={type} />
+          <InputBlock onTextChange={this.onTextChange} curText={text} />
+        </div>
       </header>
     );
   }

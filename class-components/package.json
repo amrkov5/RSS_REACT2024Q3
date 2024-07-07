@@ -18,7 +18,7 @@
       "eslint --max-warnings 0 src/**/*.tsx"
     ],
     "*.ts": [
-      "prettier --write src/**/*.tsx",
+      "prettier --write src/**/*.ts",
       "eslint --max-warnings 0 src/**/*.ts"
     ]
   },

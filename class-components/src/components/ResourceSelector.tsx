@@ -24,7 +24,7 @@ class ResourceSelector extends Component<
   render(): ReactNode {
     const { curType } = this.props;
     return (
-      <label htmlFor="resources">
+      <label htmlFor="resources" className="resource-label">
         Choose search type:
         <select
           id="resources"
@@ -32,6 +32,7 @@ class ResourceSelector extends Component<
             this.handleChange(e.target.value);
           }}
           value={curType || 'people'}
+          className="resource-selector"
         >
           <option value="people">People</option>
           <option value="films">Movies</option>

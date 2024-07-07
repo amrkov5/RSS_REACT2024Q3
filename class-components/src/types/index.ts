@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 type ChangeSearchQuery = {
   onTextChange: (text: string) => void;
 };
@@ -5,8 +7,12 @@ type ChangeResType = {
   onTypeChange: (type: string) => void;
 };
 
-type GetData = {
+type HeaderProps = {
   getData: (type: string, text: string) => void;
+  throwFetchError: () => void;
+  wholeAppError: () => void;
+  updateText: (text: string) => void | undefined;
+  updateType: (type: string) => void | undefined;
 };
 
 type HeaderState = {
@@ -26,6 +32,7 @@ type InputBlockProps = {
 
 type MainProps = {
   dataToPaint: APIResponse | null;
+  fetchError: null | boolean;
 };
 
 type Movies = {
@@ -160,7 +167,12 @@ type APIResults = {
 
 type AppState = {
   searchResults: APIResponse | null;
+  fetchError: null | boolean;
+  wholeAppError: null | boolean;
+  searchText: string;
+  type: string;
 };
+
 type FieldsToShow = {
   films: string[];
   people: string[];
@@ -168,6 +180,16 @@ type FieldsToShow = {
   vehicles: string[];
   species: string[];
   starships: string[];
+};
+
+type ErrorBoundaryProps = {
+  msg: string;
+  tryAgain?: () => void;
+  children: ReactNode;
+};
+
+type ErrorBoundaryState = {
+  error: null | boolean;
 };
 
 export type {
@@ -178,9 +200,11 @@ export type {
   ChangeResType,
   ResourceSelectorProps,
   InputBlockProps,
-  GetData,
+  HeaderProps,
   MainProps,
   APIResults,
   FieldsToShow,
   Data,
+  ErrorBoundaryProps,
+  ErrorBoundaryState,
 };

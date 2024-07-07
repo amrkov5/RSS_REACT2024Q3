@@ -11,7 +11,10 @@ class Main extends Component<MainProps, { dataToPaint: APIResponse | null }> {
   }
 
   render(): ReactNode {
-    const { dataToPaint } = this.props;
+    const { dataToPaint, fetchError } = this.props;
+    if (fetchError) {
+      throw new Error('Fetch Error');
+    }
     return (
       <main className="main">
         <div className="cards-wrapper">
