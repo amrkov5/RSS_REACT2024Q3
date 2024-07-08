@@ -1,22 +1,14 @@
-import { ReactNode } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 
 type HeaderProps = {
-  getData: (type: string, text: string) => void;
-  throwFetchError: () => void;
-  wholeAppError: () => void;
+  throwFetchError: Dispatch<SetStateAction<boolean>>;
+  wholeAppError: Dispatch<SetStateAction<boolean>>;
   updateText: (text: string) => void | undefined;
   updateType: (type: string) => void | undefined;
 };
 
-type HeaderState = {
-  type: string | null;
-  text: string | null;
-};
-
-type OnChangeFunc = (text: string) => void;
-
 type SelectorAndInputProps = {
-  onChange: OnChangeFunc;
+  onChange: Dispatch<SetStateAction<string>>;
 };
 
 type MainProps = {
@@ -154,14 +146,6 @@ type APIResults = {
   resource: keyof FieldsToShow;
 };
 
-type AppState = {
-  searchResults: APIResponse | null;
-  fetchError: boolean;
-  wholeAppError: boolean;
-  searchText: string;
-  type: string;
-};
-
 type FieldsToShow = {
   films: string[];
   people: string[];
@@ -173,18 +157,16 @@ type FieldsToShow = {
 
 type ErrorBoundaryProps = {
   msg: string;
-  tryAgain?: () => void;
+  tryAgain?: Dispatch<SetStateAction<boolean>>;
   children: ReactNode;
 };
 
 type ErrorBoundaryState = {
-  error: null | boolean;
+  error: boolean;
 };
 
 export type {
-  HeaderState,
   APIResponse,
-  AppState,
   SelectorAndInputProps,
   HeaderProps,
   MainProps,
@@ -193,5 +175,4 @@ export type {
   Data,
   ErrorBoundaryProps,
   ErrorBoundaryState,
-  OnChangeFunc,
 };

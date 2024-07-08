@@ -8,7 +8,7 @@ function reload() {
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
-    this.state = { error: null };
+    this.state = { error: false };
     this.retry = this.retry.bind(this);
   }
 
@@ -19,7 +19,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   retry() {
     const { tryAgain } = this.props;
     if (tryAgain) {
-      tryAgain();
+      tryAgain(false);
     }
     this.setState({ error: false });
   }

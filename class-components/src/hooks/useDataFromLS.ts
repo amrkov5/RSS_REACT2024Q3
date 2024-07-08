@@ -8,12 +8,9 @@ function useDataFromLS(
     if (key === 'type') {
       return typeFromLS || 'people';
     }
-    return typeFromLS || ' ';
+    return typeFromLS || '';
   });
   useEffect(() => {
-    if (!text) {
-      localStorage.removeItem(key);
-    }
     localStorage.setItem(key, text);
   }, [key, text]);
 
