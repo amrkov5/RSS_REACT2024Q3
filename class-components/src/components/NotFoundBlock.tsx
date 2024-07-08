@@ -1,9 +1,7 @@
-import { Component, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
-class NotFoundBlock extends Component {
-  render(): ReactNode {
-    return <h3>Nothing was found...</h3>;
-  }
+function NotFoundBlock(): ReactNode {
+  return <h3>Nothing was found...</h3>;
 }
 
 export default NotFoundBlock;
