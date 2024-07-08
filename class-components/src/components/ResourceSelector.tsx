@@ -7,11 +7,8 @@ function ResourceSelector({
   curType,
 }: ResourceSelectorProps): ReactNode {
   const [type, setType] = useDataFromLS('type');
-  // console.log('aftwr', curType);
   useEffect(() => {
-    // console.log(curType);
     onTypeChange(type);
-    // console.log('last', curType);
   }, [type]);
 
   return (

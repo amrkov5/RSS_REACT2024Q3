@@ -10,12 +10,8 @@ function useDataFromLS(
     }
     return typeFromLS || ' ';
   });
-
   useEffect(() => {
-    // console.log('unmount');
-    return () => {
-      localStorage.setItem(key, text);
-    };
+    localStorage.setItem(key, text);
   }, [key, text]);
 
   return [text, setText];
