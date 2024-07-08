@@ -29,7 +29,7 @@ function App(): ReactNode {
   }
 
   useEffect(() => {
-    if (type || !fetchError) {
+    if (type && !fetchError) {
       getData(type, searchText);
     }
   }, [type, searchText, fetchError]);
