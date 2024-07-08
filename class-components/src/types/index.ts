@@ -13,16 +13,10 @@ type HeaderState = {
   text: string | null;
 };
 
-type OnTypeChange = (type: string, isChanged?: boolean) => void;
+type OnChangeFunc = (text: string) => void;
 
-type ResourceSelectorProps = {
-  onTypeChange: OnTypeChange;
-  curType: string | null;
-};
-
-type InputBlockProps = {
-  onTextChange: (text: string) => void;
-  curText: string | null;
+type SelectorAndInputProps = {
+  onChange: OnChangeFunc;
 };
 
 type MainProps = {
@@ -191,8 +185,7 @@ export type {
   HeaderState,
   APIResponse,
   AppState,
-  ResourceSelectorProps,
-  InputBlockProps,
+  SelectorAndInputProps,
   HeaderProps,
   MainProps,
   APIResults,
@@ -200,5 +193,5 @@ export type {
   Data,
   ErrorBoundaryProps,
   ErrorBoundaryState,
-  OnTypeChange,
+  OnChangeFunc,
 };

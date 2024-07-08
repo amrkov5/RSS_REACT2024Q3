@@ -1,14 +1,11 @@
 import { ReactNode, useEffect } from 'react';
-import { ResourceSelectorProps } from '../types';
+import { SelectorAndInputProps } from '../types';
 import useDataFromLS from '../hooks/useDataFromLS';
 
-function ResourceSelector({
-  onTypeChange,
-  curType,
-}: ResourceSelectorProps): ReactNode {
+function ResourceSelector({ onChange }: SelectorAndInputProps): ReactNode {
   const [type, setType] = useDataFromLS('type');
   useEffect(() => {
-    onTypeChange(type);
+    onChange(type);
   }, [type]);
 
   return (
@@ -19,7 +16,7 @@ function ResourceSelector({
         onChange={(e) => {
           setType(e.target.value);
         }}
-        value={curType || 'people'}
+        value={type || 'people'}
         className="resource-selector"
       >
         <option value="people">People</option>

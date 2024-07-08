@@ -48,7 +48,6 @@ class Header extends Component<HeaderProps, HeaderState> {
   }
 
   render(): ReactNode {
-    const { type, text } = this.state;
     const { throwFetchError, wholeAppError } = this.props;
     return (
       <header className="header">
@@ -69,8 +68,8 @@ class Header extends Component<HeaderProps, HeaderState> {
           </button>
         </div>
         <div className="search-wrapper">
-          <ResourceSelector onTypeChange={this.onTypeChange} curType={type} />
-          <InputBlock onTextChange={this.onTextChange} curText={text} />
+          <ResourceSelector onChange={this.onTypeChange} />
+          <InputBlock onChange={this.onTextChange} />
         </div>
       </header>
     );

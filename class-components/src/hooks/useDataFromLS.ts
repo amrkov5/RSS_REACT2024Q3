@@ -11,6 +11,9 @@ function useDataFromLS(
     return typeFromLS || ' ';
   });
   useEffect(() => {
+    if (!text) {
+      localStorage.removeItem(key);
+    }
     localStorage.setItem(key, text);
   }, [key, text]);
 
