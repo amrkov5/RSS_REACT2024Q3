@@ -13,8 +13,10 @@ type HeaderState = {
   text: string | null;
 };
 
+type OnTypeChange = (type: string, isChanged?: boolean) => void;
+
 type ResourceSelectorProps = {
-  onTypeChange: (type: string, isChanged?: boolean) => void;
+  onTypeChange: OnTypeChange;
   curType: string | null;
 };
 
@@ -198,4 +200,5 @@ export type {
   Data,
   ErrorBoundaryProps,
   ErrorBoundaryState,
+  OnTypeChange,
 };
