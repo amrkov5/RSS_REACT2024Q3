@@ -1,4 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { HeaderProps } from '../types';
 import ResourceSelector from './ResourceSelector';
 import InputBlock from './InputBlock';
@@ -7,11 +8,28 @@ function Header(props: HeaderProps): ReactNode {
   const { throwFetchError, wholeAppError, updateText, updateType } = props;
   const [text, setText] = useState<string>('');
   const [type, setType] = useState<string>('');
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
+    if (type) {
+      const typeNav = searchParams
+        ? `/RSS_REACT2024Q3/${type}?${searchParams}`
+        : `/RSS_REACT2024Q3/${type}`;
+      navigate(typeNav);
+
+      updateType(`${type}`);
+    }
+  }, [type, navigate, updateType, searchParams]);
+
+  useEffect(() => {
+    if (text) {
+      setSearchParams({ search: text });
+    } else {
+      setSearchParams();
+    }
     updateText(text);
-    updateType(type);
-  }, [text, type]);
+  }, [text, updateText]);
 
   return (
     <header className="header">

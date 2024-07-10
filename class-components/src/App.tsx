@@ -1,9 +1,11 @@
 import { ReactNode, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from './components/Header';
 import Main from './components/Main';
 import getAPIData from './api';
 import { APIResponse } from './types';
 import ErrorBoundary from './components/Error';
+import { FIELDS_TO_SHOW } from './constants';
 
 function App(): ReactNode {
   const [searchText, setSearchText] = useState('');
@@ -11,6 +13,8 @@ function App(): ReactNode {
   const [searchResults, setSearchResults] = useState<APIResponse | null>(null);
   const [fetchError, setFetchError] = useState(false);
   const [wholeAppError, setWholeAppError] = useState(false);
+  const { resourceType } = useParams();
+  const navigate = useNavigate();
 
   const getData = async (resType: string, text: string): Promise<void> => {
     setSearchResults(null);
@@ -27,6 +31,15 @@ function App(): ReactNode {
   if (wholeAppError) {
     throw new Error('Whole app error');
   }
+
+  useEffect(() => {
+    if (
+      resourceType &&
+      !Object.keys(FIELDS_TO_SHOW).find((el) => el === resourceType)
+    ) {
+      navigate('/RSS_REACT2024Q3/not-found', { replace: true });
+    }
+  }, [resourceType]);
 
   useEffect(() => {
     if (type && !fetchError) {
