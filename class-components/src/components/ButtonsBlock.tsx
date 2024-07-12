@@ -16,7 +16,7 @@ function ButtonsBlock(props: ButtonBlockProps): ReactNode {
     if (nextPage > 1) {
       setLink(next);
     }
-    navigate(navLink);
+    navigate(navLink, { replace: false });
   };
 
   const handlePrev = (prevPage: number): void => {
@@ -28,7 +28,7 @@ function ButtonsBlock(props: ButtonBlockProps): ReactNode {
 
   useEffect(() => {
     const navLink = `/RSS_REACT2024Q3/${resourceType}/page${pageNum}?search=${searchParams.get('search')}`;
-    navigate(navLink);
+    navigate(navLink, { replace: true });
   }, []);
 
   return (

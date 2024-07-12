@@ -56,7 +56,7 @@ function App(): ReactNode {
     if (type && !fetchError) {
       getData(type, searchText, link);
     }
-  }, [type, searchText, fetchError, link]);
+  }, [type, searchText, fetchError]);
 
   useEffect(() => {
     if (!fetchError && searchText && link) {
@@ -65,7 +65,6 @@ function App(): ReactNode {
   }, [fetchError, page]);
 
   return (
-    // <>
     <Routes>
       <Route
         path="/RSS_REACT2024Q3"
@@ -117,7 +116,6 @@ function App(): ReactNode {
       </Route>
       <Route path="/RSS_REACT2024Q3/not-found" element={<NotFound />} />
     </Routes>
-    // </>
   );
 }
 // class App extends Component<object, AppState> {
