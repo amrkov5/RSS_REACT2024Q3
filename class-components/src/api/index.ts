@@ -21,17 +21,20 @@ async function getAllPages(next: string) {
 
 async function getAPIData(
   type: string,
-  text: string
+  text: string,
+  link?: string
 ): Promise<void | APIResponse> {
-  const response: APIResponse = await fetch(`${BASE}${type}?search=${text}`)
+  const path = link || `${BASE}${type}?search=${text}`;
+  const response: APIResponse = await fetch(path)
     .then((resp) => resp.json())
     .then(async (data) => {
       const fullData = data;
       fullData.resource = type;
-      if (fullData.next && !text) {
+      if (fullData.next && !text && !link) {
         const allData = await getAllPages(fullData.next);
         fullData.results.push(allData);
         fullData.results = fullData.results.flat();
+        fullData.next = null;
       }
       return fullData;
     })

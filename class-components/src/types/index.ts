@@ -14,6 +14,9 @@ type SelectorAndInputProps = {
 type MainProps = {
   dataToPaint: APIResponse | null;
   fetchError: null | boolean;
+  setLink: (nextLink: string) => void;
+  setPage: (nextPage: number) => void;
+  page: number;
 };
 
 type Movies = {
@@ -165,6 +168,19 @@ type ErrorBoundaryState = {
   error: boolean;
 };
 
+type ButtonBlockProps = {
+  prev: string;
+  next: string;
+  setLink: (nextLink: string) => void;
+  setPage: (nextPage: number) => void;
+  page: number;
+};
+
+type LayoutProps = HeaderProps & {
+  setLink: (nextLink: string) => void;
+  setPage: (nextPage: number) => void;
+};
+
 export type {
   APIResponse,
   SelectorAndInputProps,
@@ -175,4 +191,6 @@ export type {
   Data,
   ErrorBoundaryProps,
   ErrorBoundaryState,
+  ButtonBlockProps,
+  LayoutProps,
 };

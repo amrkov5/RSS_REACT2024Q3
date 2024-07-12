@@ -1,11 +1,12 @@
 import { ReactNode, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import Header from './components/Header';
+import { Route, Routes, useNavigate, useParams } from 'react-router-dom';
 import Main from './components/Main';
 import getAPIData from './api';
 import { APIResponse } from './types';
 import ErrorBoundary from './components/Error';
 import { FIELDS_TO_SHOW } from './constants';
+import Layout from './components/Layout';
+import NotFound from './components/NotFound';
 
 function App(): ReactNode {
   const [searchText, setSearchText] = useState('');
@@ -13,13 +14,23 @@ function App(): ReactNode {
   const [searchResults, setSearchResults] = useState<APIResponse | null>(null);
   const [fetchError, setFetchError] = useState(false);
   const [wholeAppError, setWholeAppError] = useState(false);
+  const [link, setLink] = useState('');
+  const [page, setPage] = useState(1);
   const { resourceType } = useParams();
   const navigate = useNavigate();
 
-  const getData = async (resType: string, text: string): Promise<void> => {
+  const getData = async (
+    resType: string,
+    text: string,
+    linkStr?: string
+  ): Promise<void> => {
     setSearchResults(null);
     try {
-      const result: APIResponse | void = await getAPIData(resType, text.trim());
+      const result: APIResponse | void = await getAPIData(
+        resType,
+        text.trim(),
+        linkStr
+      );
       if (result) {
         setSearchResults(result);
       }
@@ -43,25 +54,70 @@ function App(): ReactNode {
 
   useEffect(() => {
     if (type && !fetchError) {
-      getData(type, searchText);
+      getData(type, searchText, link);
     }
-  }, [type, searchText, fetchError]);
+  }, [type, searchText, fetchError, link]);
+
+  useEffect(() => {
+    if (!fetchError && searchText && link) {
+      getData(type, searchText, link);
+    }
+  }, [fetchError, page]);
 
   return (
-    <>
-      <Header
-        wholeAppError={setWholeAppError}
-        throwFetchError={setFetchError}
-        updateText={setSearchText}
-        updateType={setType}
-      />
-      <ErrorBoundary
-        tryAgain={setFetchError}
-        msg={"Couldn't fetch the data..."}
+    // <>
+    <Routes>
+      <Route
+        path="/RSS_REACT2024Q3"
+        element={
+          <Layout
+            wholeAppError={setWholeAppError}
+            throwFetchError={setFetchError}
+            updateText={setSearchText}
+            updateType={setType}
+            setLink={setLink}
+            setPage={setPage}
+          />
+        }
       >
-        <Main fetchError={fetchError} dataToPaint={searchResults} />
-      </ErrorBoundary>
-    </>
+        <Route
+          path=":resourceType"
+          element={
+            <ErrorBoundary
+              tryAgain={setFetchError}
+              msg={"Couldn't fetch the data..."}
+            >
+              <Main
+                fetchError={fetchError}
+                dataToPaint={searchResults}
+                setLink={setLink}
+                setPage={setPage}
+                page={page}
+              />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path=":resourceType/:pageId"
+          element={
+            <ErrorBoundary
+              tryAgain={setFetchError}
+              msg={"Couldn't fetch the data..."}
+            >
+              <Main
+                fetchError={fetchError}
+                dataToPaint={searchResults}
+                setLink={setLink}
+                setPage={setPage}
+                page={page}
+              />
+            </ErrorBoundary>
+          }
+        />
+      </Route>
+      <Route path="/RSS_REACT2024Q3/not-found" element={<NotFound />} />
+    </Routes>
+    // </>
   );
 }
 // class App extends Component<object, AppState> {
