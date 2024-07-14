@@ -147,6 +147,7 @@ type Data = Movies | People | Starships | Species | Vehicles | Planets;
 type APIResults = {
   data: Data;
   resource: keyof FieldsToShow;
+  onClick?: (link: string, name: string) => void;
 };
 
 type FieldsToShow = {

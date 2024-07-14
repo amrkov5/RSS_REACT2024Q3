@@ -7,11 +7,18 @@ function prepareFiled(field: string) {
   return formattedField.charAt(0).toUpperCase() + formattedField.slice(1);
 }
 
-function Card({ resource, data }: APIResults): ReactNode {
+function Card({ resource, data, onClick }: APIResults): ReactNode {
   const field: string[] = FIELDS_TO_SHOW[resource];
 
+  const handleClick = (dataToSingleCard: Data) => {
+    const linkName = prepareFiled(dataToSingleCard[field[0] as keyof Data]);
+    if (onClick) {
+      onClick(dataToSingleCard.url, linkName);
+    }
+  };
+
   return (
-    <div className="card">
+    <div onClick={() => handleClick(data)} className="card">
       <h3 className="card-heading">
         <span className="title-name">{`${prepareFiled(field[0])}: `}</span>
         {`${data[field[0] as keyof Data]}`}

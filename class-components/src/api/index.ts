@@ -19,11 +19,15 @@ async function getAllPages(next: string) {
   return resArr;
 }
 
-async function getAPIData(
-  type: string,
-  text: string,
-  link?: string
-): Promise<void | APIResponse> {
+async function getAPIData({
+  type,
+  text,
+  link,
+}: {
+  type?: string;
+  text?: string;
+  link?: string;
+}): Promise<void | APIResponse | Data> {
   const path = link || `${BASE}${type}?search=${text}`;
   const response: APIResponse = await fetch(path)
     .then((resp) => resp.json())

@@ -32,11 +32,12 @@ function ButtonsBlock(props: ButtonBlockProps): ReactNode {
   }, []);
 
   return (
-    <div>
+    <div className="buttons-block">
       <button
         type="button"
         disabled={!prev}
         onClick={() => handlePrev(pageNum - 1)}
+        className="pagination-button"
       >
         Prev
       </button>
@@ -44,6 +45,7 @@ function ButtonsBlock(props: ButtonBlockProps): ReactNode {
         type="button"
         disabled={!next}
         onClick={() => handleNext(pageNum + 1)}
+        className="pagination-button"
       >
         Next
       </button>

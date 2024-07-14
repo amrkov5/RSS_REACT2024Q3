@@ -7,6 +7,7 @@ import ErrorBoundary from './components/Error';
 import { FIELDS_TO_SHOW } from './constants';
 import Layout from './components/Layout';
 import NotFound from './components/NotFound';
+import SingleCard from './components/SingleCard';
 
 function App(): ReactNode {
   const [searchText, setSearchText] = useState('');
@@ -26,13 +27,13 @@ function App(): ReactNode {
   ): Promise<void> => {
     setSearchResults(null);
     try {
-      const result: APIResponse | void = await getAPIData(
-        resType,
-        text.trim(),
-        linkStr
-      );
+      const result = await getAPIData({
+        type: resType,
+        text: text.trim(),
+        link: linkStr,
+      });
       if (result) {
-        setSearchResults(result);
+        setSearchResults(result as APIResponse);
       }
     } catch (err) {
       setFetchError(true);
@@ -95,7 +96,9 @@ function App(): ReactNode {
               />
             </ErrorBoundary>
           }
-        />
+        >
+          <Route path="card/:cardName" element={<SingleCard />} />
+        </Route>
         <Route
           path=":resourceType/:pageId"
           element={
