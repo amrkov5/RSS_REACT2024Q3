@@ -27,7 +27,9 @@ function Main({
   };
 
   useEffect(() => {
-    navigate(`/RSS_REACT2024Q3/${resourceType}/card/${singleLink.name}`);
+    if (singleLink.link) {
+      navigate(`/RSS_REACT2024Q3/${resourceType}/card/${singleLink.name}`);
+    }
   }, [singleLink]);
 
   useEffect(() => {
