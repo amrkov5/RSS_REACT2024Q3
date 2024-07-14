@@ -45,7 +45,7 @@ function Header(props: LayoutProps): ReactNode {
   }, [text, updateText]);
 
   return (
-    <header className="header">
+    <header className="header" data-testid="header">
       <a
         className="header-link"
         href="https://swapi.dev/"

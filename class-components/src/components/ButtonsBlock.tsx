@@ -12,8 +12,10 @@ function ButtonsBlock(props: ButtonBlockProps): ReactNode {
   const handleNext = (nextPage: number): void => {
     const navLink = `/RSS_REACT2024Q3/${resourceType}/page${pageNum}?search=${searchParams.get('search')}`;
     setPageNum(nextPage);
-    setPage(nextPage);
-    if (nextPage > 1) {
+    if (setPage) {
+      setPage(nextPage);
+    }
+    if (nextPage > 1 && setLink) {
       setLink(next);
     }
     navigate(navLink, { replace: false });
@@ -21,8 +23,11 @@ function ButtonsBlock(props: ButtonBlockProps): ReactNode {
 
   const handlePrev = (prevPage: number): void => {
     setPageNum(prevPage);
-    setPage(prevPage);
-    setLink(prev);
+    if (setPage && setLink) {
+      setPage(prevPage);
+      setLink(prev);
+    }
+
     navigate(-1);
   };
 

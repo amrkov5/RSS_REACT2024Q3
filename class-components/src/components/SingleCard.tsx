@@ -17,7 +17,7 @@ function SingleCard(): ReactNode {
   const { resourceType } = useParams();
   const field: string[] | 'people' = resourceType
     ? FIELDS_TO_SHOW[resourceType as keyof FieldsToShow]
-    : 'people';
+    : FIELDS_TO_SHOW.people;
   const navigate = useNavigate();
 
   const getData = async (linkStr?: string): Promise<void> => {
@@ -40,7 +40,7 @@ function SingleCard(): ReactNode {
   return (
     <>
       <div className="single-card-background" onClick={() => navigate(-1)} />
-      <div className="single-card">
+      <div className="single-card" data-testid="outlet">
         {!loadedData && <Loader />}
         {loadedData && (
           <>

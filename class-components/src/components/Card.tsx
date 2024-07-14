@@ -18,7 +18,7 @@ function Card({ resource, data, onClick }: APIResults): ReactNode {
   };
 
   return (
-    <div onClick={() => handleClick(data)} className="card">
+    <div onClick={() => handleClick(data)} className="card" data-testid="card">
       <h3 className="card-heading">
         <span className="title-name">{`${prepareFiled(field[0])}: `}</span>
         {`${data[field[0] as keyof Data]}`}

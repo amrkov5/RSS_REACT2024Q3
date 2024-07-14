@@ -14,8 +14,8 @@ type SelectorAndInputProps = {
 type MainProps = {
   dataToPaint: APIResponse | null;
   fetchError: null | boolean;
-  setLink: (nextLink: string) => void;
-  setPage: (nextPage: number) => void;
+  setLink?: (nextLink: string) => void;
+  setPage?: (nextPage: number) => void;
   page: number;
 };
 
@@ -172,8 +172,8 @@ type ErrorBoundaryState = {
 type ButtonBlockProps = {
   prev: string;
   next: string;
-  setLink: (nextLink: string) => void;
-  setPage: (nextPage: number) => void;
+  setLink?: (nextLink: string) => void;
+  setPage?: (nextPage: number) => void;
   page: number;
 };
 
@@ -194,4 +194,5 @@ export type {
   ErrorBoundaryState,
   ButtonBlockProps,
   LayoutProps,
+  Species,
 };

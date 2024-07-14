@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 function Loader(): ReactNode {
   return (
-    <span className="loader_wrapper">
+    <span className="loader_wrapper" data-testid="loader">
       <svg
         viewBox="-50 -50 700 700"
         className="loader"

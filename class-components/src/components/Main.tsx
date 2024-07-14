@@ -11,8 +11,6 @@ function isNothingFound(dataToPaint: APIResponse | null): boolean {
   return Boolean(dataToPaint?.count);
 }
 
-// const OutletContext = createContext(undefined);
-
 function Main({
   dataToPaint,
   fetchError,
@@ -23,6 +21,7 @@ function Main({
   const { resourceType } = useParams();
   const navigate = useNavigate();
   const [singleLink, setSingleLink] = useState({ link: '', name: '' });
+
   const showCard = (link: string, name: string) => {
     setSingleLink({ link, name });
   };
@@ -30,10 +29,6 @@ function Main({
   useEffect(() => {
     navigate(`/RSS_REACT2024Q3/${resourceType}/card/${singleLink.name}`);
   }, [singleLink]);
-
-  if (fetchError) {
-    throw new Error('Fetch Error');
-  }
 
   useEffect(() => {
     if (
@@ -44,8 +39,12 @@ function Main({
     }
   }, [resourceType]);
 
+  if (fetchError) {
+    throw new Error('Fetch Error');
+  }
+
   return (
-    <main className="main">
+    <main className="main" data-testid="main">
       {(dataToPaint?.next || dataToPaint?.previous) && (
         <ButtonsBlock
           prev={dataToPaint.previous!}
