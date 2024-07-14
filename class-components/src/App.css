@@ -218,3 +218,11 @@ form {
     opacity: 0.5;
   }
 }
+.not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vw;
+  color: yellow;
+}
