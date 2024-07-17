@@ -7,14 +7,14 @@ function useDataFromLS(
   const { resourceType } = useParams();
   const [searchParams] = useSearchParams();
   const [text, setText] = useState(() => {
-    const typeFromLS = localStorage.getItem(key);
     if (key === 'type') {
+      const typeFromLS = localStorage.getItem(key);
       if (resourceType) {
         return resourceType;
       }
       return typeFromLS || 'people';
     }
-    return searchParams.get('search') || typeFromLS || '';
+    return searchParams.get('search') || '';
   });
   useEffect(() => {
     localStorage.setItem(key, text);

@@ -1,12 +1,37 @@
-import { ReactNode, useEffect } from 'react';
-import { SelectorAndInputProps } from '../types';
+import { ReactNode } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import useDataFromLS from '../hooks/useDataFromLS';
+import { selectType, updatePage, updateType } from '../slices/headerSlice';
 
-function ResourceSelector({ onChange }: SelectorAndInputProps): ReactNode {
-  const [type, setType] = useDataFromLS('type');
-  useEffect(() => {
-    onChange(type);
-  }, [type]);
+function ResourceSelector(): ReactNode {
+  const dispatch = useDispatch();
+  const typeFromLS = useSelector(selectType);
+  const [, setType] = useDataFromLS('type');
+
+  const onSetType = (value: string) => {
+    setType(value);
+    dispatch(updateType({ type: value }));
+    dispatch(updatePage({ page: 1 }));
+  };
+
+  // useEffect(() => {
+  //   const handlePopState = (e) => {
+  //     const newType = e.target.location.pathname
+  //       .replace('/RSS_REACT2024Q3/', '')
+  //       .replace('/', '');
+  //     if (newType) {
+  //       setType(newType);
+  //       console.log('new', newType);
+  //       dispatch(updateType({ type: newType }));
+  //     }
+  //   };
+
+  //   window.addEventListener('popstate', handlePopState);
+
+  //   return () => {
+  //     window.removeEventListener('popstate', (e) => handlePopState(e));
+  //   };
+  // }, []);
 
   return (
     <label htmlFor="resources" className="resource-label">
@@ -14,9 +39,9 @@ function ResourceSelector({ onChange }: SelectorAndInputProps): ReactNode {
       <select
         id="resources"
         onChange={(e) => {
-          setType(e.target.value);
+          onSetType(e.target.value);
         }}
-        value={type || 'people'}
+        value={typeFromLS}
         className="resource-selector"
       >
         <option value="people">People</option>

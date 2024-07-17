@@ -1,48 +1,38 @@
-import { ReactNode, useEffect, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { ReactNode, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { LayoutProps } from '../types';
 import ResourceSelector from './ResourceSelector';
 import InputBlock from './InputBlock';
+import {
+  selectPageNum,
+  selectSingleId,
+  selectText,
+  selectType,
+} from '../slices/headerSlice';
 
 function Header(props: LayoutProps): ReactNode {
-  const {
-    throwFetchError,
-    wholeAppError,
-    updateText,
-    updateType,
-    setLink,
-    setPage,
-  } = props;
-  const [text, setText] = useState<string>('');
-  const [type, setType] = useState<string>('');
+  const { throwFetchError, wholeAppError } = props;
+  const typeFromStore = useSelector(selectType);
+  const textFromStore = useSelector(selectText);
+  const pageFromStore = useSelector(selectPageNum);
+  const singleIdFromStore = useSelector(selectSingleId);
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { cardName } = useParams();
+
+  const pageNum = pageFromStore > 1 ? `page=${pageFromStore}` : '';
+  const searchQuery = textFromStore ? `search=${textFromStore}` : '';
+  const isQuerySymbolNeeded = pageFromStore || textFromStore ? '?' : '';
+  const isAndSymbolNeeded = pageFromStore > 1 && textFromStore ? '&' : '';
 
   useEffect(() => {
-    if (type && !cardName) {
-      const typeNav = searchParams.get('search')
-        ? `/RSS_REACT2024Q3/${type}?${searchParams}`
-        : `/RSS_REACT2024Q3/${type}`;
-      navigate(typeNav, { replace: true });
-
-      setLink('');
-      setPage(1);
-      updateType(type);
-    }
-  }, [type, updateType, searchParams]);
-
-  useEffect(() => {
-    if (text && !cardName) {
-      setSearchParams({ search: text }, { replace: true });
+    let typeNav = `./${typeFromStore}?${pageNum}`;
+    if (singleIdFromStore) {
+      typeNav = `./${typeFromStore}/card/${singleIdFromStore}`;
     } else {
-      setSearchParams({}, { replace: true });
+      typeNav = `./${typeFromStore}${isQuerySymbolNeeded}${searchQuery}${isAndSymbolNeeded}${pageNum}`;
     }
-
-    setLink('');
-    setPage(1);
-    updateText(text);
-  }, [text, updateText]);
+    navigate(typeNav);
+  }, [textFromStore, typeFromStore, pageFromStore, singleIdFromStore]);
 
   return (
     <header className="header" data-testid="header">
@@ -71,8 +61,8 @@ function Header(props: LayoutProps): ReactNode {
         </button>
       </div>
       <div className="search-wrapper">
-        <ResourceSelector onChange={setType} />
-        <InputBlock onChange={setText} />
+        <ResourceSelector />
+        <InputBlock />
       </div>
     </header>
   );

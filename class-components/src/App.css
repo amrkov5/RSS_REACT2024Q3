@@ -85,10 +85,17 @@ form {
   border: none;
   transition: transform 0.2s ease-in-out;
 }
+.pagination-button:disabled {
+  background-color: rgb(212, 212, 150);
+}
 .pagination-button:hover,
 .single-card-btn:hover {
   transform: scale(1.05);
   cursor: pointer;
+}
+.pagination-button:disabled:hover {
+  transform: none;
+  cursor: initial;
 }
 .single-card-btn {
   margin: 0 auto;

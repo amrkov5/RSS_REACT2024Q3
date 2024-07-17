@@ -1,23 +1,23 @@
-import { ReactNode, useEffect, useState } from 'react';
-import { SelectorAndInputProps } from '../types';
+import { ReactNode, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import useDataFromLS from '../hooks/useDataFromLS';
+import { updatePage, updateText } from '../slices/headerSlice';
 
-function InputBlock(props: SelectorAndInputProps): ReactNode {
-  const { onChange } = props;
-  const [textToLS, setTextToLS] = useDataFromLS('search');
+function InputBlock(): ReactNode {
+  const dispatch = useDispatch();
+  // const textFromLS = useSelector((state) => state.header.text);
+  const [textToLS, setTextToLS] = useDataFromLS('text');
   const [text, setText] = useState(textToLS);
 
-  const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setTextToLS(text);
+    dispatch(updateText({ text }));
+    dispatch(updatePage({ page: 1 }));
   };
 
-  useEffect(() => {
-    onChange(textToLS);
-  }, [textToLS]);
-
   return (
-    <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => submitForm(e)}>
+    <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => onSubmitForm(e)}>
       <input
         className="search-input"
         type="text"

@@ -1,81 +1,96 @@
-import { ReactNode, useEffect, useState } from 'react';
-import { Outlet, useNavigate, useParams } from 'react-router-dom';
-import { APIResponse, MainProps } from '../types';
+import { ReactNode, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { nanoid } from '@reduxjs/toolkit';
+import { Data } from '../types';
 import Card from './Card';
 import Loader from './Loader';
 import NotFoundBlock from './NotFoundBlock';
-import { FIELDS_TO_SHOW } from '../constants';
+// import { FIELDS_TO_SHOW } from '../constants';
 import ButtonsBlock from './ButtonsBlock';
+import { useLazyGetItemsQuery } from '../slices/apiSlice';
+import { selectPageNum, selectText, selectType } from '../slices/headerSlice';
 
-function isNothingFound(dataToPaint: APIResponse | null): boolean {
-  return Boolean(dataToPaint?.count);
-}
+function Main(): ReactNode {
+  const type = useSelector(selectType);
+  const text = useSelector(selectText);
+  const page = useSelector(selectPageNum);
 
-function Main({
-  dataToPaint,
-  fetchError,
-  setLink,
-  setPage,
-  page,
-}: MainProps): ReactNode {
-  const { resourceType } = useParams();
-  const navigate = useNavigate();
-  const [singleLink, setSingleLink] = useState({ link: '', name: '' });
-
-  const showCard = (link: string, name: string) => {
-    setSingleLink({ link, name });
-  };
+  const [trigger, { data, isLoading, isFetching, isSuccess, isError }] =
+    useLazyGetItemsQuery();
 
   useEffect(() => {
-    if (singleLink.link) {
-      navigate(`/RSS_REACT2024Q3/${resourceType}/card/${singleLink.name}`);
-    }
-  }, [singleLink]);
+    trigger({
+      resourceType: type,
+      query: text,
+      page,
+    });
+  }, [type, text, page, trigger]);
 
-  useEffect(() => {
-    if (
-      resourceType &&
-      !Object.keys(FIELDS_TO_SHOW).find((el) => el === resourceType)
-    ) {
-      navigate('/RSS_REACT2024Q3/not-found', { replace: true });
-    }
-  }, [resourceType]);
+  // const {
+  //   data: data,
+  //   isLoading,
+  //   isFetching,
+  //   isSuccess,
+  //   isError,
+  // } = useGetItemsQuery({
+  //   resourceType,
+  //   query: URLSearchParams.get('search'),
+  //   page: URLSearchParams.get('page'),
+  // });
 
-  if (fetchError) {
-    throw new Error('Fetch Error');
+  let areButtonsNeeded = false;
+  let content;
+  if (isLoading || isFetching) {
+    areButtonsNeeded = false;
+    content = <Loader />;
+  } else if (isSuccess) {
+    if (data.results.length === 0) {
+      content = <NotFoundBlock />;
+    } else {
+      if (data.next || data.previous) {
+        areButtonsNeeded = true;
+      }
+      content = data.results.map((el: Data) => (
+        <Card data={el} key={nanoid()} />
+      ));
+    }
+  } else if (isError) {
+    throw new Error('Fetch error');
   }
+
+  // const navigate = useNavigate();
+  // const [singleLink, setSingleLink] = useState({ link: '', name: '' });
+
+  // const showCard = (link: string, name: string) => {
+  //   setSingleLink({ link, name });
+  // };
+
+  // useEffect(() => {
+  //   if (singleLink.link) {
+  //     navigate(`/RSS_REACT2024Q3/${resourceType}/card/${singleLink.name}`);
+  //   }
+  // }, [singleLink]);
+
+  // useEffect(() => {
+  //   if (
+  //     resourceType &&
+  //     !Object.keys(FIELDS_TO_SHOW).find((el) => el === resourceType)
+  //   ) {
+  //     navigate('/RSS_REACT2024Q3/not-found', { replace: true });
+  //   }
+  // }, [resourceType]);
+
+  // if (fetchError) {
+  //   throw new Error('Fetch Error');
+  // }
 
   return (
     <main className="main" data-testid="main">
-      {(dataToPaint?.next || dataToPaint?.previous) && (
-        <ButtonsBlock
-          prev={dataToPaint.previous!}
-          next={dataToPaint.next!}
-          setLink={setLink}
-          setPage={setPage}
-          page={page}
-        />
-      )}
+      {areButtonsNeeded && <ButtonsBlock next={data.next!} />}
       <div className="cards-outlet-wrapper">
-        {!dataToPaint && <Loader />}
-        {!isNothingFound(dataToPaint) && dataToPaint && <NotFoundBlock />}
-        {dataToPaint && isNothingFound(dataToPaint) && (
-          <div className="cards-wrapper">
-            {dataToPaint.results.map((el) => (
-              <Card
-                onClick={showCard}
-                resource={dataToPaint.resource}
-                data={el}
-                key={Date.parse(el.edited)}
-              />
-            ))}
-          </div>
-        )}
-        {singleLink && (
-          <Outlet
-            context={singleLink satisfies { link: string; name: string }}
-          />
-        )}
+        <div className="cards-wrapper">{content}</div>
+        <Outlet />
       </div>
     </main>
   );

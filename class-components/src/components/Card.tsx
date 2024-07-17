@@ -1,24 +1,29 @@
 import { ReactNode } from 'react';
-import { APIResults, Data } from '../types';
-import { FIELDS_TO_SHOW } from '../constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { Data, FieldsToShow } from '../types';
+import FIELDS_TO_SHOW from '../constants';
+import { selectType, updateSingleId } from '../slices/headerSlice';
 
 function prepareFiled(field: string) {
   const formattedField = field.replace('_', ' ');
   return formattedField.charAt(0).toUpperCase() + formattedField.slice(1);
 }
 
-function Card({ resource, data, onClick }: APIResults): ReactNode {
+function Card({ data }: { data: Data }): ReactNode {
+  const dispatch = useDispatch();
+  const resource = useSelector(selectType) as keyof FieldsToShow;
   const field: string[] = FIELDS_TO_SHOW[resource];
 
-  const handleClick = (dataToSingleCard: Data) => {
-    const linkName = prepareFiled(dataToSingleCard[field[0] as keyof Data]);
-    if (onClick) {
-      onClick(dataToSingleCard.url, linkName);
-    }
+  const handleClick = (url: string) => {
+    dispatch(updateSingleId({ singleId: url.match(/\d+/g) }));
   };
 
   return (
-    <div onClick={() => handleClick(data)} className="card" data-testid="card">
+    <div
+      onClick={() => handleClick(data.url)}
+      className="card"
+      data-testid="card"
+    >
       <h3 className="card-heading">
         <span className="title-name">{`${prepareFiled(field[0])}: `}</span>
         {`${data[field[0] as keyof Data]}`}

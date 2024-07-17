@@ -1,6 +1,6 @@
 import { FieldsToShow } from './types';
 
-const BASE = 'https://swapi.dev/api/';
+// const BASE = 'https://swapi.dev/api/';
 
 const FIELDS_TO_SHOW: FieldsToShow = {
   films: [
@@ -52,4 +52,4 @@ const FIELDS_TO_SHOW: FieldsToShow = {
   starships: ['name', 'model', 'crew', 'passengers', 'length'],
 };
 
-export { BASE, FIELDS_TO_SHOW };
+export default FIELDS_TO_SHOW;

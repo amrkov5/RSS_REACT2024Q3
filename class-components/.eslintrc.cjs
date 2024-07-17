@@ -9,6 +9,7 @@ module.exports = {
     'plugin:react/recommended',
     'prettier',
     'plugin:prettier/recommended',
+    'plugin:react-redux/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
@@ -21,7 +22,12 @@ module.exports = {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
   },
-  plugins: ['react-refresh', 'react-compiler', '@typescript-eslint'],
+  plugins: [
+    'react-refresh',
+    'react-compiler',
+    '@typescript-eslint',
+    'react-redux',
+  ],
   rules: {
     'react-refresh/only-export-components': [
       'warn',

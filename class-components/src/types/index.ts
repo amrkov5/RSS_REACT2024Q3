@@ -1,22 +1,16 @@
 import { Dispatch, ReactNode, SetStateAction } from 'react';
 
-type HeaderProps = {
-  throwFetchError: Dispatch<SetStateAction<boolean>>;
-  wholeAppError: Dispatch<SetStateAction<boolean>>;
-  updateText: (text: string) => void | undefined;
-  updateType: (type: string) => void | undefined;
-};
+// type HeaderProps = {
+//   throwFetchError: Dispatch<SetStateAction<boolean>>;
+//   wholeAppError: Dispatch<SetStateAction<boolean>>;
+// };
 
-type SelectorAndInputProps = {
-  onChange: Dispatch<SetStateAction<string>>;
-};
+// type SelectorAndInputProps = {
+//   onChange: Dispatch<SetStateAction<string>>;
+// };
 
 type MainProps = {
-  dataToPaint: APIResponse | null;
   fetchError: null | boolean;
-  setLink?: (nextLink: string) => void;
-  setPage?: (nextPage: number) => void;
-  page: number;
 };
 
 type Movies = {
@@ -129,26 +123,26 @@ type Planets = {
   edited: string;
 };
 
-interface APIResponse {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  resource: keyof FieldsToShow;
-  results:
-    | Movies[]
-    | People[]
-    | Starships[]
-    | Species[]
-    | Vehicles[]
-    | Planets[];
-}
+// interface APIResponse {
+//   count: number;
+//   next: string | null;
+//   previous: string | null;
+//   resource: keyof FieldsToShow;
+//   results:
+//     | Movies[]
+//     | People[]
+//     | Starships[]
+//     | Species[]
+//     | Vehicles[]
+//     | Planets[];
+// }
 
 type Data = Movies | People | Starships | Species | Vehicles | Planets;
-type APIResults = {
-  data: Data;
-  resource: keyof FieldsToShow;
-  onClick?: (link: string, name: string) => void;
-};
+// type APIResults = {
+//   data: Data;
+//   resource: keyof FieldsToShow;
+//   onClick?: (link: string, name: string) => void;
+// };
 
 type FieldsToShow = {
   films: string[];
@@ -170,29 +164,24 @@ type ErrorBoundaryState = {
 };
 
 type ButtonBlockProps = {
-  prev: string;
   next: string;
-  setLink?: (nextLink: string) => void;
-  setPage?: (nextPage: number) => void;
-  page: number;
 };
 
-type LayoutProps = HeaderProps & {
-  setLink: (nextLink: string) => void;
-  setPage: (nextPage: number) => void;
+type LayoutProps = {
+  throwFetchError: Dispatch<SetStateAction<boolean>>;
+  wholeAppError: Dispatch<SetStateAction<boolean>>;
 };
 
 export type {
-  APIResponse,
-  SelectorAndInputProps,
-  HeaderProps,
+  // APIResponse,
+  // SelectorAndInputProps,
   MainProps,
-  APIResults,
+  // APIResults,
   FieldsToShow,
   Data,
   ErrorBoundaryProps,
   ErrorBoundaryState,
   ButtonBlockProps,
   LayoutProps,
-  Species,
+  // Species,
 };
