@@ -5,8 +5,13 @@ type HeaderState = {
   singleId: number;
 };
 
-type RootState = {
-  header: HeaderState;
+type SelectedItemState = {
+  selectedArr: string[];
 };
 
-export type { HeaderState, RootState };
+type RootState = {
+  header: HeaderState;
+  selectedItems: SelectedItemState;
+};
+
+export default RootState;

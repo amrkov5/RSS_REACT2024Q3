@@ -119,6 +119,14 @@ form {
 .card-heading {
   margin: 0;
 }
+.card-selector {
+  display: flex;
+  align-items: center;
+  color: yellow;
+}
+.card-selector input {
+  margin: 3px 0 0 7px;
+}
 .error-wrapper {
   display: flex;
   flex-direction: column;

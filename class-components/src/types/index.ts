@@ -28,6 +28,7 @@ type Movies = {
   url: string;
   created: string;
   edited: string;
+  id: string;
 };
 
 type People = {
@@ -47,6 +48,7 @@ type People = {
   url: string;
   created: string;
   edited: string;
+  id: string;
 };
 
 type Starships = {
@@ -68,6 +70,7 @@ type Starships = {
   url: string;
   created: string;
   edited: string;
+  id: string;
 };
 
 type Vehicles = {
@@ -87,6 +90,7 @@ type Vehicles = {
   url: string;
   created: string;
   edited: string;
+  id: string;
 };
 
 type Species = {
@@ -104,6 +108,7 @@ type Species = {
   url: string;
   created: string;
   edited: string;
+  id: string;
 };
 
 type Planets = {
@@ -121,21 +126,22 @@ type Planets = {
   url: string;
   created: string;
   edited: string;
+  id: string;
 };
 
-// interface APIResponse {
-//   count: number;
-//   next: string | null;
-//   previous: string | null;
-//   resource: keyof FieldsToShow;
-//   results:
-//     | Movies[]
-//     | People[]
-//     | Starships[]
-//     | Species[]
-//     | Vehicles[]
-//     | Planets[];
-// }
+interface APIResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  resource: keyof FieldsToShow;
+  results:
+    | Movies[]
+    | People[]
+    | Starships[]
+    | Species[]
+    | Vehicles[]
+    | Planets[];
+}
 
 type Data = Movies | People | Starships | Species | Vehicles | Planets;
 // type APIResults = {
@@ -173,7 +179,7 @@ type LayoutProps = {
 };
 
 export type {
-  // APIResponse,
+  APIResponse,
   // SelectorAndInputProps,
   MainProps,
   // APIResults,

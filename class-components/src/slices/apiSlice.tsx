@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { APIResponse } from '../types';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
@@ -16,6 +17,18 @@ export const apiSlice = createApi({
           return `/${resourceType}?page=${page}`;
         }
         return `/${resourceType}`;
+      },
+      transformResponse: (response: APIResponse) => {
+        if (Array.isArray(response.results)) {
+          return {
+            ...response,
+            results: response.results.map((el) => ({
+              ...el,
+              id: `${Date.parse(el.created)}`,
+            })),
+          };
+        }
+        return response;
       },
     }),
     getSingleCard: builder.query({

@@ -1,12 +1,10 @@
 import { ReactNode, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { nanoid } from '@reduxjs/toolkit';
 import { Data } from '../types';
 import Card from './Card';
 import Loader from './Loader';
 import NotFoundBlock from './NotFoundBlock';
-// import { FIELDS_TO_SHOW } from '../constants';
 import ButtonsBlock from './ButtonsBlock';
 import { useLazyGetItemsQuery } from '../slices/apiSlice';
 import { selectPageNum, selectText, selectType } from '../slices/headerSlice';
@@ -51,9 +49,7 @@ function Main(): ReactNode {
       if (data.next || data.previous) {
         areButtonsNeeded = true;
       }
-      content = data.results.map((el: Data) => (
-        <Card data={el} key={nanoid()} />
-      ));
+      content = data.results.map((el: Data) => <Card data={el} key={el.id} />);
     }
   } else if (isError) {
     throw new Error('Fetch error');
@@ -87,7 +83,7 @@ function Main(): ReactNode {
 
   return (
     <main className="main" data-testid="main">
-      {areButtonsNeeded && <ButtonsBlock next={data.next!} />}
+      {areButtonsNeeded && isSuccess && <ButtonsBlock next={data.next!} />}
       <div className="cards-outlet-wrapper">
         <div className="cards-wrapper">{content}</div>
         <Outlet />

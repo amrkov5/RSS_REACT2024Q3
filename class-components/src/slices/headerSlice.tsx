@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from './types';
+import RootState from './types';
 
 const headerSlice = createSlice({
   name: 'header',
