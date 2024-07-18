@@ -16,7 +16,7 @@ function prepareFiled(field: string) {
 
 function Card({ data }: { data: Data }): ReactNode {
   const selectedItems = useSelector(selectItemsArr);
-  const isChecked = !!selectedItems.find((el) => el === data.id);
+  const isChecked = !!selectedItems.find((el) => el.id === data.id);
   const dispatch = useDispatch();
   const resource = useSelector(selectType) as keyof FieldsToShow;
   const field: string[] = FIELDS_TO_SHOW[resource];
@@ -37,9 +37,9 @@ function Card({ data }: { data: Data }): ReactNode {
 
   const onChange = () => {
     if (isChecked) {
-      dispatch(removeItem(data.id));
+      dispatch(removeItem(data));
     } else {
-      dispatch(addItem(data.id));
+      dispatch(addItem(data));
     }
   };
 

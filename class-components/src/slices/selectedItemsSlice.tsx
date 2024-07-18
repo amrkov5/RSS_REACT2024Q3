@@ -12,20 +12,21 @@ const selectedItemsSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action) => {
-      const id: string = action.payload;
+      const id = action.payload;
       state.selectedArr = [...state.selectedArr, id];
     },
     removeItem: (state, action) => {
       state.selectedArr = state.selectedArr.filter(
-        (el) => el !== action.payload
+        (el) => el.id !== action.payload.id
       );
     },
+    clearList: () => initialState,
   },
 });
 
 export const selectItemsArr = (state: RootState) =>
   state.selectedItems.selectedArr;
-export const { removeItem, addItem } = selectedItemsSlice.actions;
+export const { removeItem, addItem, clearList } = selectedItemsSlice.actions;
 
 export default selectedItemsSlice.reducer;
 

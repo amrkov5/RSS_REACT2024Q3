@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useDataFromLS from '../hooks/useDataFromLS';
 import { selectType, updatePage, updateType } from '../slices/headerSlice';
+import { clearList } from '../slices/selectedItemsSlice';
 
 function ResourceSelector(): ReactNode {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ function ResourceSelector(): ReactNode {
     setType(value);
     dispatch(updateType({ type: value }));
     dispatch(updatePage({ page: 1 }));
+    dispatch(clearList());
   };
 
   // useEffect(() => {

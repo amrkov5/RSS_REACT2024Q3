@@ -1,3 +1,5 @@
+import { Data } from '../types';
+
 type HeaderState = {
   type: string;
   text: string;
@@ -6,7 +8,7 @@ type HeaderState = {
 };
 
 export type SelectedItemState = {
-  selectedArr: string[];
+  selectedArr: Data[] | [];
 };
 
 type RootState = {

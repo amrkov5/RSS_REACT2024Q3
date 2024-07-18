@@ -91,7 +91,7 @@ function Main(): ReactNode {
         <div className="cards-wrapper">{content}</div>
         <Outlet />
       </div>
-      {selectedArr.length && <FLayout />}
+      {!!selectedArr.length && <FLayout />}
     </main>
   );
 }
