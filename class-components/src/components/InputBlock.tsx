@@ -5,7 +5,6 @@ import { updatePage, updateText } from '../slices/headerSlice';
 
 function InputBlock(): ReactNode {
   const dispatch = useDispatch();
-  // const textFromLS = useSelector((state) => state.header.text);
   const [textToLS, setTextToLS] = useDataFromLS('text');
   const [text, setText] = useState(textToLS);
 

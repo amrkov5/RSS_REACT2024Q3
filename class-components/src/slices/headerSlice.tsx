@@ -34,7 +34,7 @@ const headerSlice = createSlice({
 const selectPageNum = (state: RootState) => state.header.page;
 const selectType = (state: RootState) => state.header.type;
 const selectText = (state: RootState) => state.header.text;
-const selectSingleId = (state: RootState) => state.header.text;
+const selectSingleId = (state: RootState) => state.header.singleId;
 
 export const { updateType, updateText, updatePage, updateSingleId } =
   headerSlice.actions;
