@@ -5,7 +5,7 @@ type HeaderState = {
   singleId: number;
 };
 
-type SelectedItemState = {
+export type SelectedItemState = {
   selectedArr: string[];
 };
 

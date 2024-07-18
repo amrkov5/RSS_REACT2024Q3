@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Data, FieldsToShow } from '../types';
 import FIELDS_TO_SHOW from '../constants';
@@ -20,9 +20,19 @@ function Card({ data }: { data: Data }): ReactNode {
   const dispatch = useDispatch();
   const resource = useSelector(selectType) as keyof FieldsToShow;
   const field: string[] = FIELDS_TO_SHOW[resource];
-  // console.log(selectedItems);
-  const handleClick = (url: string) => {
-    dispatch(updateSingleId({ singleId: url.match(/\d+/g) }));
+  const inputRef = useRef<HTMLInputElement>(null);
+  const labelRef = useRef<HTMLLabelElement>(null);
+
+  const handleClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    url: string
+  ) => {
+    if (
+      (inputRef.current && !inputRef.current.contains(e.target as Node)) ||
+      (labelRef.current && !labelRef.current.contains(e.target as Node))
+    ) {
+      dispatch(updateSingleId({ singleId: url.match(/\d+/g) }));
+    }
   };
 
   const onChange = () => {
@@ -35,7 +45,7 @@ function Card({ data }: { data: Data }): ReactNode {
 
   return (
     <div
-      onClick={() => handleClick(data.url)}
+      onClick={(e) => handleClick(e, data.url)}
       className="card"
       data-testid="card"
     >
@@ -61,13 +71,18 @@ function Card({ data }: { data: Data }): ReactNode {
           {`${data[field[4] as keyof Data]}`}
         </p>
       )}
-      <label className="card-selector" htmlFor="selector">
+      <label
+        className="card-selector"
+        htmlFor={`selector-${data.id}`}
+        ref={labelRef}
+      >
         Select card:
         <input
           type="checkbox"
           id={`selector-${data.id}`}
           checked={isChecked}
           onChange={onChange}
+          ref={inputRef}
         />
       </label>
     </div>

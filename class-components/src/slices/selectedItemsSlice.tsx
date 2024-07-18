@@ -1,13 +1,15 @@
 /* eslint-disable no-param-reassign */
 
 import { createSlice } from '@reduxjs/toolkit';
-import RootState from './types';
+import RootState, { SelectedItemState } from './types';
+
+const initialState: SelectedItemState = {
+  selectedArr: [],
+};
 
 const selectedItemsSlice = createSlice({
   name: 'selectedItems',
-  initialState: {
-    selectedArr: ['qwer', 'qwer'],
-  },
+  initialState,
   reducers: {
     addItem: (state, action) => {
       const id: string = action.payload;

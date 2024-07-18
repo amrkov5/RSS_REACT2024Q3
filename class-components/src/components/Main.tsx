@@ -8,11 +8,14 @@ import NotFoundBlock from './NotFoundBlock';
 import ButtonsBlock from './ButtonsBlock';
 import { useLazyGetItemsQuery } from '../slices/apiSlice';
 import { selectPageNum, selectText, selectType } from '../slices/headerSlice';
+import { selectItemsArr } from '../slices/selectedItemsSlice';
+import FLayout from './FlayoutComponent';
 
 function Main(): ReactNode {
   const type = useSelector(selectType);
   const text = useSelector(selectText);
   const page = useSelector(selectPageNum);
+  const selectedArr = useSelector(selectItemsArr);
 
   const [trigger, { data, isLoading, isFetching, isSuccess, isError }] =
     useLazyGetItemsQuery();
@@ -88,6 +91,7 @@ function Main(): ReactNode {
         <div className="cards-wrapper">{content}</div>
         <Outlet />
       </div>
+      {selectedArr.length && <FLayout />}
     </main>
   );
 }
