@@ -1,10 +1,11 @@
 import { ReactNode } from 'react';
-import { useSelector } from 'react-redux';
-import { selectItemsArr } from '../slices/selectedItemsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearList, selectItemsArr } from '../slices/selectedItemsSlice';
 import downloadCSV from '../service/downloadCSV';
 import { selectType } from '../slices/headerSlice';
 
 function FLayout(): ReactNode {
+  const dispatch = useDispatch();
   const selectedArr = useSelector(selectItemsArr);
   const type = useSelector(selectType);
 
@@ -16,6 +17,9 @@ function FLayout(): ReactNode {
       </p>
       <button type="button" onClick={() => downloadCSV(selectedArr, type)}>
         Download
+      </button>
+      <button type="button" onClick={() => dispatch(clearList())}>
+        Clear selection
       </button>
     </div>
   );
