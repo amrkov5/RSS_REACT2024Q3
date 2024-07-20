@@ -1,11 +1,13 @@
-import { ReactNode } from 'react';
+import { ReactNode, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectPageNum, updatePage } from '../slices/headerSlice';
 import { ButtonBlockProps } from '../types';
+import { ThemeContext } from './ThemeContext';
 
 function ButtonsBlock({ next }: ButtonBlockProps): ReactNode {
   const pageNumFromStore = useSelector(selectPageNum);
   const dispatch = useDispatch();
+  const theme = useContext(ThemeContext);
 
   const handleNext = (): void => {
     dispatch(updatePage({ page: pageNumFromStore + 1 }));
@@ -21,6 +23,7 @@ function ButtonsBlock({ next }: ButtonBlockProps): ReactNode {
         disabled={pageNumFromStore === 1}
         onClick={handlePrev}
         className="pagination-button"
+        data-theme={theme?.theme}
       >
         Prev
       </button>
@@ -29,6 +32,7 @@ function ButtonsBlock({ next }: ButtonBlockProps): ReactNode {
         disabled={!next}
         onClick={handleNext}
         className="pagination-button"
+        data-theme={theme?.theme}
       >
         Next
       </button>

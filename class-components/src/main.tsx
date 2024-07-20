@@ -7,13 +7,16 @@ import App from './App';
 import './index.css';
 import './App.css';
 import store from './store';
+import ThemeProvider from './components/ThemeContext';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
         <ErrorBoundary msg="Something went wrong...">
-          <App />
+          <ThemeProvider>
+            <App />
+          </ThemeProvider>
         </ErrorBoundary>
       </BrowserRouter>
     </Provider>

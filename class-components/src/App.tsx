@@ -1,46 +1,50 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useContext, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Main from './components/Main';
 import ErrorBoundary from './components/Error';
 import Layout from './components/Layout';
 import NotFound from './components/NotFound';
 import SingleCard from './components/SingleCard';
+import { ThemeContext } from './components/ThemeContext';
 
 function App(): ReactNode {
   const [, setFetchError] = useState(false);
   const [wholeAppError, setWholeAppError] = useState(false);
+  const theme = useContext(ThemeContext);
 
   if (wholeAppError) {
     throw new Error('Whole app error');
   }
 
   return (
-    <Routes>
-      <Route
-        path="/RSS_REACT2024Q3"
-        element={
-          <Layout
-            wholeAppError={setWholeAppError}
-            throwFetchError={setFetchError}
-          />
-        }
-      >
+    <div className="app" data-theme={theme?.theme}>
+      <Routes>
         <Route
-          path="/RSS_REACT2024Q3/:resourceType"
+          path="/RSS_REACT2024Q3"
           element={
-            <ErrorBoundary
-              tryAgain={setFetchError}
-              msg={"Couldn't fetch the data..."}
-            >
-              <Main />
-            </ErrorBoundary>
+            <Layout
+              wholeAppError={setWholeAppError}
+              throwFetchError={setFetchError}
+            />
           }
         >
-          <Route path="card/:id" element={<SingleCard />} />
+          <Route
+            path="/RSS_REACT2024Q3/:resourceType"
+            element={
+              <ErrorBoundary
+                tryAgain={setFetchError}
+                msg={"Couldn't fetch the data..."}
+              >
+                <Main />
+              </ErrorBoundary>
+            }
+          >
+            <Route path="card/:id" element={<SingleCard />} />
+          </Route>
         </Route>
-      </Route>
-      <Route path="/RSS_REACT2024Q3/not-found" element={<NotFound />} />
-    </Routes>
+        <Route path="/RSS_REACT2024Q3/not-found" element={<NotFound />} />
+      </Routes>
+    </div>
   );
 }
 

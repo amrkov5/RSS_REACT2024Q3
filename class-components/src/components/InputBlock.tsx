@@ -1,12 +1,15 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import useDataFromLS from '../hooks/useDataFromLS';
 import { updatePage, updateText } from '../slices/headerSlice';
+import { ThemeContext } from './ThemeContext';
+import '../index.css';
 
 function InputBlock(): ReactNode {
   const dispatch = useDispatch();
   const [textToLS, setTextToLS] = useDataFromLS('text');
   const [text, setText] = useState(textToLS);
+  const theme = useContext(ThemeContext);
 
   const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,7 +26,8 @@ function InputBlock(): ReactNode {
         value={text || ''}
         onChange={(e) => setText(e.target.value)}
       />
-      <button type="submit" className="search-btn">
+
+      <button type="submit" className="search-btn" data-theme={theme?.theme}>
         Search
       </button>
     </form>

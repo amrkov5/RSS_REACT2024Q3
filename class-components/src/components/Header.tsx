@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { LayoutProps } from '../types';
@@ -10,6 +10,9 @@ import {
   selectText,
   selectType,
 } from '../slices/headerSlice';
+import { ThemeContext } from './ThemeContext';
+import '../index.css';
+import ThemeSwitcher from './ThemeSwitcher';
 
 function Header(props: LayoutProps): ReactNode {
   const { throwFetchError, wholeAppError } = props;
@@ -18,6 +21,7 @@ function Header(props: LayoutProps): ReactNode {
   const pageFromStore = useSelector(selectPageNum);
   const singleIdFromStore = useSelector(selectSingleId);
   const navigate = useNavigate();
+  const theme = useContext(ThemeContext);
 
   const pageNum = pageFromStore > 1 ? `page=${pageFromStore}` : '';
   const searchQuery = textFromStore ? `search=${textFromStore}` : '';
@@ -35,7 +39,7 @@ function Header(props: LayoutProps): ReactNode {
   }, [textFromStore, typeFromStore, pageFromStore, singleIdFromStore]);
 
   return (
-    <header className="header" data-testid="header">
+    <header className="header" data-testid="header" data-theme={theme?.theme}>
       <a
         className="header-link"
         href="https://swapi.dev/"
@@ -64,6 +68,7 @@ function Header(props: LayoutProps): ReactNode {
         <ResourceSelector />
         <InputBlock />
       </div>
+      <ThemeSwitcher />
     </header>
   );
 }
