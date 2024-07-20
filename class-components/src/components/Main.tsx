@@ -9,7 +9,7 @@ import ButtonsBlock from './ButtonsBlock';
 import { useLazyGetItemsQuery } from '../slices/apiSlice';
 import { selectPageNum, selectText, selectType } from '../slices/headerSlice';
 import { selectItemsArr } from '../slices/selectedItemsSlice';
-import FLayout from './FlayoutComponent';
+import FLyout from './FlyoutComponent';
 
 function Main(): ReactNode {
   const type = useSelector(selectType);
@@ -91,7 +91,7 @@ function Main(): ReactNode {
         <div className="cards-wrapper">{content}</div>
         <Outlet />
       </div>
-      {!!selectedArr.length && <FLayout />}
+      {!!selectedArr.length && <FLyout />}
     </main>
   );
 }

@@ -92,7 +92,8 @@ form {
   padding: 20px;
 }
 .pagination-button,
-.single-card-btn {
+.single-card-btn,
+.flyout-btn {
   height: 30px;
   width: 80px;
   margin-right: 15px;
@@ -107,7 +108,8 @@ form {
   background-color: rgb(212, 212, 150);
 }
 .pagination-button:hover,
-.single-card-btn:hover {
+.single-card-btn:hover,
+.flyout-btn:hover {
   transform: scale(1.05);
   cursor: pointer;
 }
@@ -335,4 +337,19 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+.flyout-wrapper {
+  position: sticky;
+  left: calc(50% - 225px);
+  bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-color);
+  width: 450px;
+  padding: 10px;
+  color: var(--color);
+  border: 1px solid var(--accent-color);
+  border-radius: 15px;
+  box-shadow: var(--btns-shadow);
 }
