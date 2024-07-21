@@ -1,82 +1,127 @@
-// import { render, waitFor } from '@testing-library/react';
-// import { BrowserRouter, useOutletContext } from 'react-router-dom';
-// import { describe, expect, Mock } from 'vitest';
-// import SingleCard from '../components/SingleCard';
-// import { mockAPIResponse } from './mockdata';
-// import { Species } from '../types';
+import {
+  fireEvent,
+  render,
+  waitForElementToBeRemoved,
+  within,
+} from '@testing-library/react';
+import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom';
+import { describe, expect } from 'vitest';
+import { Provider } from 'react-redux';
+import SingleCard from '../components/SingleCard';
+import { mockAPIResponse } from './mockdata';
+import store from '../store';
+import { updateSingleId, updateType } from '../slices/headerSlice';
+import ErrorBoundary from '../components/Error';
+import Main from '../components/Main';
 
-// vi.mock('react-router-dom', async () => {
-//   const original = await vi.importActual('react-router-dom');
-//   return {
-//     ...original,
-//     useOutletContext: vi.fn(),
-//     useParams: () => ({ resourceType: 'species' }),
-//     useNavigate: () => () => {},
-//   };
-// });
+const navigate = vi.fn();
 
-// const mockedImplementation = async (): Promise<Response> => {
-//   const mockedData: Species = mockAPIResponse.results[0] as Species;
+vi.mock('react-router-dom', async (importOriginal) => {
+  const actual = (await importOriginal()) as object;
+  return {
+    ...actual,
+    useNavigate: () => navigate,
+  };
+});
 
-//   const response = new Response(JSON.stringify(mockedData), {
-//     status: 200,
-//     headers: {
-//       'Content-type': 'application/json',
-//     },
-//   });
+describe('Single card tests', () => {
+  it('should show loader in detailed description', () => {
+    store.dispatch(updateType({ type: 'species' }));
+    store.dispatch(updateSingleId({ singleId: '1' }));
+    const { getByTestId } = render(
+      <BrowserRouter>
+        <Provider store={store}>
+          <SingleCard />
+        </Provider>
+      </BrowserRouter>
+    );
 
-//   return Promise.resolve(response);
-// };
+    const loader = getByTestId('loader');
+    expect(loader).toBeInTheDocument();
+  });
 
-// describe('Single card tests', () => {
-//   const fetchSpy = vi.spyOn(window, 'fetch');
+  it('should show correct info in the detailed description', async () => {
+    store.dispatch(updateType({ type: 'species' }));
+    store.dispatch(updateSingleId({ singleId: '1' }));
 
-//   fetchSpy.mockImplementation(mockedImplementation);
+    const { getAllByTestId, getByTestId } = render(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={[`/RSS_REACT2024Q3/species/card/1`]}>
+          <Routes>
+            <Route
+              path="/RSS_REACT2024Q3/:resourceType"
+              element={
+                <ErrorBoundary msg={"Couldn't fetch the data..."}>
+                  <Main fetchError={false} />
+                </ErrorBoundary>
+              }
+            >
+              <Route path="card/:id" element={<SingleCard />} />
+            </Route>
+          </Routes>
+        </MemoryRouter>
+      </Provider>
+    );
 
-//   it('should show loader in detailed description', () => {
-//     const mockContextValue = { link: 'test-link', name: 'test-name' };
-//     (useOutletContext as Mock).mockReturnValue(mockContextValue);
+    await waitForElementToBeRemoved(getAllByTestId('loader'));
 
-//     const { getByTestId } = render(
-//       <BrowserRouter>
-//         <SingleCard />
-//       </BrowserRouter>
-//     );
+    const outlet = getByTestId('outlet');
 
-//     const loader = getByTestId('loader');
-//     expect(loader).toBeInTheDocument();
-//   });
+    const name = within(outlet).getByText(mockAPIResponse.results[0].name);
+    const classification = within(outlet).getByText(
+      mockAPIResponse.results[0].classification
+    );
+    const height = within(outlet).getByText(
+      mockAPIResponse.results[0].average_height
+    );
+    const lifespan = within(outlet).getByText(
+      mockAPIResponse.results[0].average_lifespan
+    );
+    const designation = within(outlet).getByText(
+      mockAPIResponse.results[0].designation
+    );
+    const hair = within(outlet).getByText(
+      mockAPIResponse.results[0].hair_color
+    );
+    const skin = within(outlet).getByText(
+      mockAPIResponse.results[0].skin_colors
+    );
+    expect(name).toBeInTheDocument();
+    expect(classification).toBeInTheDocument();
+    expect(height).toBeInTheDocument();
+    expect(lifespan).toBeInTheDocument();
+    expect(designation).toBeInTheDocument();
+    expect(hair).toBeInTheDocument();
+    expect(skin).toBeInTheDocument();
+  });
 
-//   it('should show correct info in the detailed description', async () => {
-//     const mockContextValue = { link: 'test-link', name: 'test-name' };
+  it('close button should close detailed description', async () => {
+    store.dispatch(updateType({ type: 'species' }));
+    store.dispatch(updateSingleId({ singleId: '1' }));
+    const { getAllByTestId, getByTestId } = render(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={[`/RSS_REACT2024Q3/species/card/1`]}>
+          <Routes>
+            <Route
+              path="/RSS_REACT2024Q3/:resourceType"
+              element={
+                <ErrorBoundary msg={"Couldn't fetch the data..."}>
+                  <Main fetchError={false} />
+                </ErrorBoundary>
+              }
+            >
+              <Route path="card/:id" element={<SingleCard />} />
+            </Route>
+          </Routes>
+        </MemoryRouter>
+      </Provider>
+    );
 
-//     (useOutletContext as Mock).mockReturnValue(mockContextValue);
+    await waitForElementToBeRemoved(getAllByTestId('loader'));
+    const outlet = getByTestId('outlet');
 
-//     const { getByTestId, getByText } = render(
-//       <BrowserRouter>
-//         <SingleCard />
-//       </BrowserRouter>
-//     );
-
-//     const loader = getByTestId('loader');
-
-//     await waitFor(() => {
-//       expect(loader).not.toBeInTheDocument();
-//     });
-
-//     const name = getByText(mockAPIResponse.results[0].name);
-//     const classification = getByText(mockAPIResponse.results[0].classification);
-//     const height = getByText(mockAPIResponse.results[0].average_height);
-//     const lifespan = getByText(mockAPIResponse.results[0].average_lifespan);
-//     const designation = getByText(mockAPIResponse.results[0].designation);
-//     const hair = getByText(mockAPIResponse.results[0].hair_colors);
-//     const skin = getByText(mockAPIResponse.results[0].skin_colors);
-//     expect(name).toBeInTheDocument();
-//     expect(classification).toBeInTheDocument();
-//     expect(height).toBeInTheDocument();
-//     expect(lifespan).toBeInTheDocument();
-//     expect(designation).toBeInTheDocument();
-//     expect(hair).toBeInTheDocument();
-//     expect(skin).toBeInTheDocument();
-//   });
-// });
+    fireEvent.click(within(outlet).getByText('Close'));
+    store.dispatch(updateSingleId({ singleId: null }));
+    expect(navigate).toBeCalled();
+  });
+});

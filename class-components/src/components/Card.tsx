@@ -96,6 +96,7 @@ function Card({ data }: { data: Data }): ReactNode {
           id={`selector-${data.id}`}
           checked={isChecked}
           onChange={onChange}
+          data-testid="card-selector"
         />
       </label>
     </div>

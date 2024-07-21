@@ -3,6 +3,7 @@ import { APIResponse } from '../types';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
+  keepUnusedDataFor: 60,
   baseQuery: fetchBaseQuery({ baseUrl: 'https://swapi.dev/api' }),
   endpoints: (builder) => ({
     getItems: builder.query({

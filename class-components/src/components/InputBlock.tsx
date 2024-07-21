@@ -19,12 +19,16 @@ function InputBlock(): ReactNode {
   };
 
   return (
-    <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => onSubmitForm(e)}>
+    <form
+      onSubmit={(e: React.FormEvent<HTMLFormElement>) => onSubmitForm(e)}
+      data-testid="search-form"
+    >
       <input
         className="search-input"
         type="text"
         value={text || ''}
         onChange={(e) => setText(e.target.value)}
+        data-testid="search-text"
       />
 
       <button type="submit" className="search-btn" data-theme={theme?.theme}>

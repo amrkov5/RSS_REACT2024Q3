@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  flex-grow: 1;
   color: var(--color);
   background-color: var(--bg-color);
 }
@@ -60,6 +61,16 @@ form {
   width: 150px;
   margin-right: 20px;
   font-size: 16px;
+  background-color: var(--selector-bg-color);
+  color: var(--color);
+  box-shadow: var(--btns-shadow);
+  border: none;
+  border-radius: 5px;
+}
+.search-input:focus,
+.search-input:active {
+  outline-color: var(--accent-color);
+  border: none;
 }
 .search-btn {
   width: 70px;
@@ -67,6 +78,7 @@ form {
   background-color: var(--btns-background);
   box-shadow: var(--btns-shadow);
   border: var(--btns-border);
+  border-radius: 5px;
   transition: transform 0.2s ease-in-out;
 }
 .search-btn:hover {
@@ -80,6 +92,8 @@ form {
   height: 30px;
   font-size: 16px;
   margin-left: 10px;
+  background-color: var(--selector-bg-color);
+  color: var(--color);
 }
 .main {
   display: flex;
@@ -159,7 +173,7 @@ form {
 .try-again-btn {
   width: 100px;
   height: 30px;
-  color: var(--color);
+  color: var(black);
   background-color: yellow;
   box-shadow: var(--btns-shadow);
   border: none;

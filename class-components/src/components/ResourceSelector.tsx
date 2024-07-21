@@ -45,6 +45,7 @@ function ResourceSelector(): ReactNode {
         }}
         value={typeFromLS}
         className="resource-selector"
+        data-testid="type-selector"
       >
         <option value="people">People</option>
         <option value="films">Movies</option>

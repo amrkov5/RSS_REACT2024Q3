@@ -49,7 +49,11 @@ function SingleCard(): ReactNode {
   if (isSuccess) {
     content = (
       <>
-        <div className="single-card-background" onClick={closeSingleCard} />
+        <div
+          className="single-card-background"
+          onClick={closeSingleCard}
+          data-testid="detailed-card"
+        />
 
         <h3 className="card-heading">
           <span className="title-name">{`${prepareFiled(field[0])}: `}</span>

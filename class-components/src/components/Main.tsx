@@ -11,7 +11,7 @@ import { selectPageNum, selectText, selectType } from '../slices/headerSlice';
 import { selectItemsArr } from '../slices/selectedItemsSlice';
 import FLyout from './FlyoutComponent';
 
-function Main(): ReactNode {
+function Main({ fetchError }: { fetchError: boolean }): ReactNode {
   const type = useSelector(selectType);
   const text = useSelector(selectText);
   const page = useSelector(selectPageNum);
@@ -80,9 +80,9 @@ function Main(): ReactNode {
   //   }
   // }, [resourceType]);
 
-  // if (fetchError) {
-  //   throw new Error('Fetch Error');
-  // }
+  if (fetchError) {
+    throw new Error('Fetch Error');
+  }
 
   return (
     <main className="main" data-testid="main">

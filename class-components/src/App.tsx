@@ -8,7 +8,7 @@ import SingleCard from './components/SingleCard';
 import { ThemeContext } from './components/ThemeContext';
 
 function App(): ReactNode {
-  const [, setFetchError] = useState(false);
+  const [fetchError, setFetchError] = useState(false);
   const [wholeAppError, setWholeAppError] = useState(false);
   const theme = useContext(ThemeContext);
 
@@ -17,7 +17,7 @@ function App(): ReactNode {
   }
 
   return (
-    <div className="app" data-theme={theme?.theme}>
+    <div className="app" data-theme={theme?.theme} data-testid="app">
       <Routes>
         <Route
           path="/RSS_REACT2024Q3"
@@ -35,7 +35,7 @@ function App(): ReactNode {
                 tryAgain={setFetchError}
                 msg={"Couldn't fetch the data..."}
               >
-                <Main />
+                <Main fetchError={fetchError} />
               </ErrorBoundary>
             }
           >

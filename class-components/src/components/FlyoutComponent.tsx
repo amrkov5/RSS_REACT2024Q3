@@ -11,7 +11,7 @@ function FLyout(): ReactNode {
   const type = useSelector(selectType);
 
   return (
-    <div className="flyout-wrapper">
+    <div className="flyout-wrapper" data-testid="flyout">
       <p>
         You have selected {selectedArr.length} card
         {selectedArr.length > 1 ? 's' : ''}

@@ -134,13 +134,7 @@ interface APIResponse {
   next: string | null;
   previous: string | null;
   resource: keyof FieldsToShow;
-  results:
-    | Movies[]
-    | People[]
-    | Starships[]
-    | Species[]
-    | Vehicles[]
-    | Planets[];
+  results: Data[];
 }
 
 type Data = Movies | People | Starships | Species | Vehicles | Planets;
