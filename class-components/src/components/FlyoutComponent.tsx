@@ -29,7 +29,7 @@ function FLyout(): ReactNode {
           type="button"
           onClick={() => dispatch(clearList())}
         >
-          Clear
+          Unselect All
         </button>
       </div>
     </div>

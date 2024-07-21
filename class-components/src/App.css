@@ -118,6 +118,9 @@ form {
   box-shadow: var(--btns-shadow);
   transition: transform 0.2s ease-in-out;
 }
+.flyout-btn {
+  width: 120px;
+}
 .pagination-button:disabled {
   background-color: rgb(212, 212, 150);
 }
@@ -360,7 +363,7 @@ input:checked + .slider:before {
   justify-content: space-between;
   align-items: center;
   background-color: var(--bg-color);
-  width: 450px;
+  width: 550px;
   padding: 10px;
   color: var(--color);
   border: 1px solid var(--accent-color);
