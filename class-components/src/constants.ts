@@ -1,7 +1,5 @@
 import { FieldsToShow } from './types';
 
-// const BASE = 'https://swapi.dev/api/';
-
 const FIELDS_TO_SHOW: FieldsToShow = {
   films: [
     'title',

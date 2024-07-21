@@ -1,11 +1,5 @@
 import { Data } from '../types';
 
-// function prepareHeader(data: Data[], header: (keyof Data)[]) {
-//   header.map((el) => {
-//     if (data[el])
-//   })
-// }
-
 export default function generateCSV(data: Data[]) {
   const header = `${Object.keys(data[0]).join(',')}\n`;
   const rows = data

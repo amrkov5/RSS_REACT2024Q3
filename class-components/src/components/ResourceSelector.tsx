@@ -16,25 +16,6 @@ function ResourceSelector(): ReactNode {
     dispatch(clearList());
   };
 
-  // useEffect(() => {
-  //   const handlePopState = (e) => {
-  //     const newType = e.target.location.pathname
-  //       .replace('/RSS_REACT2024Q3/', '')
-  //       .replace('/', '');
-  //     if (newType) {
-  //       setType(newType);
-  //       console.log('new', newType);
-  //       dispatch(updateType({ type: newType }));
-  //     }
-  //   };
-
-  //   window.addEventListener('popstate', handlePopState);
-
-  //   return () => {
-  //     window.removeEventListener('popstate', (e) => handlePopState(e));
-  //   };
-  // }, []);
-
   return (
     <label htmlFor="resources" className="resource-label">
       Choose search type:

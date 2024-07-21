@@ -1,6 +1,5 @@
 import { createContext, ReactNode, useMemo, useState } from 'react';
 
-// export default function ThemeContext() {}
 export const ThemeContext = createContext<
   | { theme: string; setTheme: React.Dispatch<React.SetStateAction<string>> }
   | undefined

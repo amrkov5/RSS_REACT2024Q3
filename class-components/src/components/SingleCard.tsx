@@ -15,9 +15,6 @@ function prepareFiled(field: string) {
 function SingleCard(): ReactNode {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const singleId = useSelector((state: RootState) => state.header.singleId);
-  // const resourceType = useSelector((state: RootState) => state.header.type);
-  // const [loadedData, setLoadedData] = useState<Data | null>(null);
   const { resourceType, id } = useParams();
   const field: string[] | 'people' = resourceType
     ? FIELDS_TO_SHOW[resourceType as keyof FieldsToShow]
