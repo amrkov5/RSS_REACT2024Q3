@@ -81,7 +81,7 @@ describe('Single card tests', () => {
       mockAPIResponse.results[0].designation
     );
     const hair = within(outlet).getByText(
-      mockAPIResponse.results[0].hair_color
+      mockAPIResponse.results[0].hair_colors
     );
     const skin = within(outlet).getByText(
       mockAPIResponse.results[0].skin_colors
