@@ -44,7 +44,7 @@ const FIELDS_TO_SHOW: FieldsToShow = {
     'average_height',
     'average_lifespan',
     'designation',
-    'hair_color',
+    'hair_colors',
     'skin_colors',
   ],
   starships: ['name', 'model', 'crew', 'passengers', 'length'],
