@@ -5,6 +5,9 @@ const handlers = [
   http.get('https://swapi.dev/api/species', () => {
     return HttpResponse.json(mockAPIResponse);
   }),
+  http.get('https://swapi.dev/api/people', () => {
+    return HttpResponse.json(mockAPIResponse);
+  }),
   http.get('https://swapi.dev/api/nothing', () => {
     return HttpResponse.json(emptyResponse);
   }),

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1721594849267" clover="3.2.0">
-  <project timestamp="1721594849267" name="All files">
-    <metrics statements="1022" coveredstatements="829" conditionals="91" coveredconditionals="66" methods="56" coveredmethods="37" elements="1169" coveredelements="932" complexity="0" loc="1022" ncloc="1022" packages="7" files="28" classes="28"/>
+<coverage generated="1721734076528" clover="3.2.0">
+  <project timestamp="1721734076529" name="All files">
+    <metrics statements="1056" coveredstatements="860" conditionals="92" coveredconditionals="68" methods="61" coveredmethods="39" elements="1209" coveredelements="967" complexity="0" loc="1056" ncloc="1056" packages="7" files="30" classes="30"/>
     <package name="src">
-      <metrics statements="117" coveredstatements="98" conditionals="5" coveredconditionals="2" methods="3" coveredmethods="2"/>
+      <metrics statements="107" coveredstatements="90" conditionals="4" coveredconditionals="2" methods="3" coveredmethods="2"/>
       <file name="App.tsx" path="C:\Users\anton.markov\Documents\JS\Projects\RSS_REACT2024Q3\class-components\src\App.tsx">
-        <metrics statements="35" coveredstatements="33" conditionals="3" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <metrics statements="23" coveredstatements="23" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -16,31 +16,19 @@
         <line num="8" count="1" type="stmt"/>
         <line num="10" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
-        <line num="15" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
+        <line num="14" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="20" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
         <line num="25" count="1" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
         <line num="32" count="1" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
         <line num="34" count="1" type="stmt"/>
-        <line num="35" count="1" type="stmt"/>
-        <line num="36" count="1" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="42" count="1" type="stmt"/>
-        <line num="45" count="1" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="51" count="1" type="stmt"/>
       </file>
       <file name="constants.ts" path="C:\Users\anton.markov\Documents\JS\Projects\RSS_REACT2024Q3\class-components\src\constants.ts">
         <metrics statements="50" coveredstatements="50" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -116,26 +104,28 @@
         <line num="18" count="0" type="stmt"/>
       </file>
       <file name="store.tsx" path="C:\Users\anton.markov\Documents\JS\Projects\RSS_REACT2024Q3\class-components\src\store.tsx">
-        <metrics statements="15" coveredstatements="15" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <metrics statements="17" coveredstatements="17" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
-        <line num="13" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="14" count="5" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="16" count="5" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.components">
-      <metrics statements="527" coveredstatements="390" conditionals="55" coveredconditionals="40" methods="34" coveredmethods="20"/>
+      <metrics statements="547" coveredstatements="409" conditionals="56" coveredconditionals="41" methods="35" coveredmethods="21"/>
       <file name="ButtonsBlock.tsx" path="C:\Users\anton.markov\Documents\JS\Projects\RSS_REACT2024Q3\class-components\src\components\ButtonsBlock.tsx">
         <metrics statements="32" coveredstatements="28" conditionals="3" coveredconditionals="1" methods="3" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -257,7 +247,7 @@
         <line num="106" count="1" type="stmt"/>
       </file>
       <file name="Error.tsx" path="C:\Users\anton.markov\Documents\JS\Projects\RSS_REACT2024Q3\class-components\src\components\Error.tsx">
-        <metrics statements="40" coveredstatements="17" conditionals="3" coveredconditionals="2" methods="5" coveredmethods="2"/>
+        <metrics statements="38" coveredstatements="17" conditionals="3" coveredconditionals="2" methods="5" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
@@ -276,12 +266,12 @@
         <line num="21" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
         <line num="23" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="27" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="28" count="3" type="stmt"/>
-        <line num="29" count="3" type="stmt"/>
-        <line num="30" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="25" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="26" count="3" type="stmt"/>
+        <line num="27" count="3" type="stmt"/>
+        <line num="28" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
         <line num="33" count="0" type="stmt"/>
@@ -289,15 +279,13 @@
         <line num="35" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
         <line num="37" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="50" count="0" type="stmt"/>
-        <line num="51" count="3" type="stmt"/>
-        <line num="52" count="3" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="49" count="3" type="stmt"/>
+        <line num="50" count="3" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
         <line num="53" count="1" type="stmt"/>
-        <line num="55" count="1" type="stmt"/>
       </file>
       <file name="FlyoutComponent.tsx" path="C:\Users\anton.markov\Documents\JS\Projects\RSS_REACT2024Q3\class-components\src\components\FlyoutComponent.tsx">
         <metrics statements="28" coveredstatements="28" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="1"/>
@@ -331,12 +319,13 @@
         <line num="39" count="1" type="stmt"/>
       </file>
       <file name="Header.tsx" path="C:\Users\anton.markov\Documents\JS\Projects\RSS_REACT2024Q3\class-components\src\components\Header.tsx">
-        <metrics statements="55" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="56" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
@@ -422,12 +411,13 @@
         <line num="41" count="1" type="stmt"/>
       </file>
       <file name="Layout.tsx" path="C:\Users\anton.markov\Documents\JS\Projects\RSS_REACT2024Q3\class-components\src\components\Layout.tsx">
-        <metrics statements="33" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="37" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
         <line num="18" count="1" type="stmt"/>
         <line num="20" count="0" type="stmt"/>
@@ -444,18 +434,21 @@
         <line num="32" count="0" type="stmt"/>
         <line num="33" count="0" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
         <line num="37" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
         <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
         <line num="44" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
         <line num="49" count="0" type="stmt"/>
-        <line num="51" count="1" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
       </file>
       <file name="Loader.tsx" path="C:\Users\anton.markov\Documents\JS\Projects\RSS_REACT2024Q3\class-components\src\components\Loader.tsx">
         <metrics statements="17" coveredstatements="17" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
@@ -478,7 +471,7 @@
         <line num="26" count="1" type="stmt"/>
       </file>
       <file name="Main.tsx" path="C:\Users\anton.markov\Documents\JS\Projects\RSS_REACT2024Q3\class-components\src\components\Main.tsx">
-        <metrics statements="54" coveredstatements="50" conditionals="15" coveredconditionals="12" methods="1" coveredmethods="1"/>
+        <metrics statements="56" coveredstatements="52" conditionals="15" coveredconditionals="12" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -490,49 +483,51 @@
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
-        <line num="14" count="25" type="cond" truecount="1" falsecount="0"/>
-        <line num="15" count="25" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="25" type="cond" truecount="1" falsecount="0"/>
         <line num="16" count="25" type="stmt"/>
         <line num="17" count="25" type="stmt"/>
         <line num="18" count="25" type="stmt"/>
+        <line num="19" count="25" type="stmt"/>
         <line num="20" count="25" type="stmt"/>
-        <line num="21" count="25" type="stmt"/>
-        <line num="23" count="25" type="cond" truecount="1" falsecount="0"/>
-        <line num="24" count="8" type="stmt"/>
-        <line num="25" count="8" type="stmt"/>
+        <line num="22" count="25" type="stmt"/>
+        <line num="23" count="25" type="stmt"/>
+        <line num="25" count="25" type="cond" truecount="1" falsecount="0"/>
         <line num="26" count="8" type="stmt"/>
         <line num="27" count="8" type="stmt"/>
         <line num="28" count="8" type="stmt"/>
-        <line num="29" count="25" type="stmt"/>
+        <line num="29" count="8" type="stmt"/>
+        <line num="30" count="8" type="stmt"/>
         <line num="31" count="25" type="stmt"/>
-        <line num="32" count="25" type="stmt"/>
-        <line num="33" count="25" type="cond" truecount="2" falsecount="0"/>
-        <line num="34" count="8" type="stmt"/>
-        <line num="35" count="8" type="stmt"/>
-        <line num="36" count="25" type="cond" truecount="2" falsecount="0"/>
-        <line num="37" count="6" type="cond" truecount="1" falsecount="0"/>
-        <line num="38" count="1" type="stmt"/>
+        <line num="33" count="25" type="stmt"/>
+        <line num="34" count="25" type="stmt"/>
+        <line num="35" count="25" type="cond" truecount="2" falsecount="0"/>
+        <line num="36" count="8" type="stmt"/>
+        <line num="37" count="8" type="stmt"/>
+        <line num="38" count="25" type="cond" truecount="2" falsecount="0"/>
         <line num="39" count="6" type="cond" truecount="1" falsecount="0"/>
-        <line num="40" count="5" type="cond" truecount="0" falsecount="1"/>
-        <line num="41" count="5" type="stmt"/>
-        <line num="42" count="5" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="42" count="5" type="cond" truecount="0" falsecount="1"/>
         <line num="43" count="5" type="stmt"/>
         <line num="44" count="5" type="stmt"/>
-        <line num="45" count="14" type="cond" truecount="1" falsecount="1"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="47" count="0" type="cond" truecount="1" falsecount="0"/>
-        <line num="49" count="25" type="cond" truecount="0" falsecount="1"/>
-        <line num="50" count="0" type="stmt"/>
-        <line num="51" count="0" type="cond" truecount="1" falsecount="0"/>
-        <line num="53" count="22" type="stmt"/>
-        <line num="54" count="22" type="stmt"/>
-        <line num="55" count="25" type="cond" truecount="1" falsecount="0"/>
-        <line num="56" count="25" type="stmt"/>
-        <line num="57" count="25" type="stmt"/>
+        <line num="45" count="5" type="stmt"/>
+        <line num="46" count="5" type="stmt"/>
+        <line num="47" count="14" type="cond" truecount="1" falsecount="1"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="49" count="0" type="cond" truecount="1" falsecount="0"/>
+        <line num="51" count="25" type="cond" truecount="0" falsecount="1"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="53" count="0" type="cond" truecount="1" falsecount="0"/>
+        <line num="55" count="22" type="stmt"/>
+        <line num="56" count="22" type="stmt"/>
+        <line num="57" count="25" type="cond" truecount="1" falsecount="0"/>
         <line num="58" count="25" type="stmt"/>
+        <line num="59" count="25" type="stmt"/>
         <line num="60" count="25" type="stmt"/>
-        <line num="63" count="25" type="stmt"/>
-        <line num="65" count="1" type="stmt"/>
+        <line num="62" count="25" type="stmt"/>
+        <line num="65" count="25" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
       </file>
       <file name="NotFound.tsx" path="C:\Users\anton.markov\Documents\JS\Projects\RSS_REACT2024Q3\class-components\src\components\NotFound.tsx">
         <metrics statements="7" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -708,6 +703,24 @@
         <line num="18" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
       </file>
+      <file name="connectComponent.tsx" path="C:\Users\anton.markov\Documents\JS\Projects\RSS_REACT2024Q3\class-components\src\components\connectComponent.tsx">
+        <metrics statements="15" coveredstatements="15" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="7" count="12" type="stmt"/>
+        <line num="8" count="12" type="stmt"/>
+        <line num="9" count="12" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+      </file>
     </package>
     <package name="src.hooks">
       <metrics statements="22" coveredstatements="20" conditionals="7" coveredconditionals="5" methods="1" coveredmethods="1"/>
@@ -777,7 +790,7 @@
       </file>
     </package>
     <package name="src.slices">
-      <metrics statements="101" coveredstatements="93" conditionals="21" coveredconditionals="16" methods="16" coveredmethods="14"/>
+      <metrics statements="125" coveredstatements="113" conditionals="22" coveredconditionals="17" methods="20" coveredmethods="15"/>
       <file name="apiSlice.tsx" path="C:\Users\anton.markov\Documents\JS\Projects\RSS_REACT2024Q3\class-components\src\slices\apiSlice.tsx">
         <metrics statements="39" coveredstatements="31" conditionals="10" coveredconditionals="5" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
@@ -819,6 +832,33 @@
         <line num="39" count="1" type="stmt"/>
         <line num="41" count="1" type="stmt"/>
         <line num="42" count="1" type="stmt"/>
+      </file>
+      <file name="errorSlice.tsx" path="C:\Users\anton.markov\Documents\JS\Projects\RSS_REACT2024Q3\class-components\src\slices\errorSlice.tsx">
+        <metrics statements="24" coveredstatements="20" conditionals="1" coveredconditionals="1" methods="4" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
       </file>
       <file name="headerSlice.tsx" path="C:\Users\anton.markov\Documents\JS\Projects\RSS_REACT2024Q3\class-components\src\slices\headerSlice.tsx">
         <metrics statements="37" coveredstatements="37" conditionals="7" coveredconditionals="7" methods="8" coveredmethods="7"/>

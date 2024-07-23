@@ -4,7 +4,7 @@ import {
   waitForElementToBeRemoved,
   within,
 } from '@testing-library/react';
-import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect } from 'vitest';
 import { Provider } from 'react-redux';
 import SingleCard from '../components/SingleCard';
@@ -29,14 +29,26 @@ describe('Single card tests', () => {
     store.dispatch(updateType({ type: 'species' }));
     store.dispatch(updateSingleId({ singleId: '1' }));
     const { getByTestId } = render(
-      <BrowserRouter>
-        <Provider store={store}>
-          <SingleCard />
-        </Provider>
-      </BrowserRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={[`/RSS_REACT2024Q3/species/card/1`]}>
+          <Routes>
+            <Route
+              path="/RSS_REACT2024Q3/:resourceType"
+              element={
+                <ConnectError msg={"Couldn't fetch the data..."}>
+                  <Main />
+                </ConnectError>
+              }
+            >
+              <Route path="card/:id" element={<SingleCard />} />
+            </Route>
+          </Routes>
+        </MemoryRouter>
+      </Provider>
     );
+    const outlet = getByTestId('outlet');
 
-    const loader = getByTestId('loader');
+    const loader = within(outlet).getByTestId('loader');
     expect(loader).toBeInTheDocument();
   });
 
