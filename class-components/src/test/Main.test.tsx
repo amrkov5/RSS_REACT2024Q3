@@ -7,7 +7,7 @@ import store from '../store';
 import { updateSingleId, updateType } from '../slices/headerSlice';
 import { mockAPIResponse } from './mockdata';
 import SingleCard from '../components/SingleCard';
-import ErrorBoundary from '../components/Error';
+import ConnectError from '../components/connectComponent';
 
 describe('Main', () => {
   beforeAll(() => server.listen());
@@ -18,7 +18,7 @@ describe('Main', () => {
     const { getByTestId } = render(
       <BrowserRouter>
         <Provider store={store}>
-          <Main fetchError={false} />
+          <Main />
         </Provider>
       </BrowserRouter>
     );
@@ -31,7 +31,7 @@ describe('Main', () => {
     const { getByTestId } = render(
       <BrowserRouter>
         <Provider store={store}>
-          <Main fetchError={false} />
+          <Main />
         </Provider>
       </BrowserRouter>
     );
@@ -45,7 +45,7 @@ describe('Main', () => {
     const { getAllByTestId } = render(
       <BrowserRouter>
         <Provider store={store}>
-          <Main fetchError={false} />
+          <Main />
         </Provider>
       </BrowserRouter>
     );
@@ -64,7 +64,7 @@ describe('Main', () => {
     render(
       <BrowserRouter>
         <Provider store={store}>
-          <Main fetchError={false} />
+          <Main />
         </Provider>
       </BrowserRouter>
     );
@@ -90,9 +90,9 @@ describe('Main', () => {
             <Route
               path="/RSS_REACT2024Q3/:resourceType"
               element={
-                <ErrorBoundary msg={"Couldn't fetch the data..."}>
-                  <Main fetchError={false} />
-                </ErrorBoundary>
+                <ConnectError msg={"Couldn't fetch the data..."}>
+                  <Main />
+                </ConnectError>
               }
             >
               <Route path="card/:id" element={<SingleCard />} />

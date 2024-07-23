@@ -1,13 +1,12 @@
-import { useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 import {
   Outlet,
   useNavigate,
   useParams,
   useSearchParams,
 } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Header from './Header';
-import { LayoutProps } from '../types';
 import useDataFromLS from '../hooks/useDataFromLS';
 import {
   updatePage,
@@ -16,16 +15,20 @@ import {
   updateType,
 } from '../slices/headerSlice';
 import FIELDS_TO_SHOW from '../constants';
+import { selectWholeAppError } from '../slices/errorSlice';
 
-function Layout(props: LayoutProps) {
+function Layout(): ReactNode {
   const navigate = useNavigate();
   const { resourceType, id } = useParams();
   const [typeFromLS] = useDataFromLS('type');
   const [textFromLS] = useDataFromLS('text');
   const dispatch = useDispatch();
-  const { wholeAppError, throwFetchError } = props;
   const [URLSearchParams] = useSearchParams();
+  const appError = useSelector(selectWholeAppError);
 
+  if (appError) {
+    throw new Error('Whole app error');
+  }
   if (
     resourceType &&
     !Object.keys(FIELDS_TO_SHOW).find((el) => el === typeFromLS)
@@ -42,7 +45,7 @@ function Layout(props: LayoutProps) {
 
   return (
     <>
-      <Header wholeAppError={wholeAppError} throwFetchError={throwFetchError} />
+      <Header />
       <Outlet />
     </>
   );

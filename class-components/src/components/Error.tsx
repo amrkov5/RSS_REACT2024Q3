@@ -17,21 +17,19 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   retry() {
-    const { tryAgain } = this.props;
-    if (tryAgain) {
-      tryAgain(false);
-    }
+    const { fetchErrorFn } = this.props;
     this.setState({ error: false });
+    fetchErrorFn();
   }
 
   render(): ReactNode {
     const { error } = this.state;
-    const { msg, children, tryAgain } = this.props;
+    const { msg, children, fetchError, appError } = this.props;
     if (error) {
       return (
         <div className="error-wrapper">
           <h2>{msg}</h2>
-          {tryAgain && (
+          {fetchError && (
             <button
               onClick={this.retry}
               className="try-again-btn"
@@ -40,7 +38,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
               Try Again
             </button>
           )}
-          {!tryAgain && (
+          {appError && (
             <button onClick={reload} className="try-again-btn" type="button">
               Try Again
             </button>

@@ -7,6 +7,11 @@ type HeaderState = {
   singleId: number;
 };
 
+type ErrorState = {
+  wholeAppError: boolean;
+  fetchError: boolean;
+};
+
 export type SelectedItemState = {
   selectedArr: Data[] | [];
 };
@@ -14,6 +19,7 @@ export type SelectedItemState = {
 type RootState = {
   header: HeaderState;
   selectedItems: SelectedItemState;
+  errors: ErrorState;
 };
 
 export default RootState;

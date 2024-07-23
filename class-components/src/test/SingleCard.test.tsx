@@ -11,8 +11,8 @@ import SingleCard from '../components/SingleCard';
 import { mockAPIResponse } from './mockdata';
 import store from '../store';
 import { updateSingleId, updateType } from '../slices/headerSlice';
-import ErrorBoundary from '../components/Error';
 import Main from '../components/Main';
+import ConnectError from '../components/connectComponent';
 
 const navigate = vi.fn();
 
@@ -51,9 +51,9 @@ describe('Single card tests', () => {
             <Route
               path="/RSS_REACT2024Q3/:resourceType"
               element={
-                <ErrorBoundary msg={"Couldn't fetch the data..."}>
-                  <Main fetchError={false} />
-                </ErrorBoundary>
+                <ConnectError msg={"Couldn't fetch the data..."}>
+                  <Main />
+                </ConnectError>
               }
             >
               <Route path="card/:id" element={<SingleCard />} />
@@ -105,9 +105,9 @@ describe('Single card tests', () => {
             <Route
               path="/RSS_REACT2024Q3/:resourceType"
               element={
-                <ErrorBoundary msg={"Couldn't fetch the data..."}>
-                  <Main fetchError={false} />
-                </ErrorBoundary>
+                <ConnectError msg={"Couldn't fetch the data..."}>
+                  <Main />
+                </ConnectError>
               }
             >
               <Route path="card/:id" element={<SingleCard />} />

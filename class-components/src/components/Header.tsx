@@ -1,7 +1,6 @@
 import { ReactNode, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { LayoutProps } from '../types';
+import { useDispatch, useSelector } from 'react-redux';
 import ResourceSelector from './ResourceSelector';
 import InputBlock from './InputBlock';
 import {
@@ -13,9 +12,10 @@ import {
 import { ThemeContext } from './ThemeContext';
 import '../index.css';
 import ThemeSwitcher from './ThemeSwitcher';
+import { toggleAppError, toggleFetchError } from '../slices/errorSlice';
 
-function Header(props: LayoutProps): ReactNode {
-  const { throwFetchError, wholeAppError } = props;
+function Header(): ReactNode {
+  const dispatch = useDispatch();
   const typeFromStore = useSelector(selectType);
   const textFromStore = useSelector(selectText);
   const pageFromStore = useSelector(selectPageNum);
@@ -51,14 +51,14 @@ function Header(props: LayoutProps): ReactNode {
       <div className="err-wrapper">
         <button
           className="err-btn"
-          onClick={() => throwFetchError(true)}
+          onClick={() => dispatch(toggleFetchError())}
           type="button"
         >
           Fetch Error
         </button>
         <button
           className="err-btn"
-          onClick={() => wholeAppError(true)}
+          onClick={() => dispatch(toggleAppError())}
           type="button"
         >
           App Error

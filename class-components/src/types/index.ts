@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction } from 'react';
+import { ReactNode } from 'react';
 
 // type HeaderProps = {
 //   throwFetchError: Dispatch<SetStateAction<boolean>>;
@@ -9,9 +9,9 @@ import { Dispatch, ReactNode, SetStateAction } from 'react';
 //   onChange: Dispatch<SetStateAction<string>>;
 // };
 
-type MainProps = {
-  fetchError: null | boolean;
-};
+// type MainProps = {
+//   fetchError: null | boolean;
+// };
 
 type Movies = {
   title: string;
@@ -155,8 +155,10 @@ type FieldsToShow = {
 
 type ErrorBoundaryProps = {
   msg: string;
-  tryAgain?: Dispatch<SetStateAction<boolean>>;
   children: ReactNode;
+  fetchError: boolean;
+  appError: boolean;
+  fetchErrorFn: () => void;
 };
 
 type ErrorBoundaryState = {
@@ -167,21 +169,21 @@ type ButtonBlockProps = {
   next: string;
 };
 
-type LayoutProps = {
-  throwFetchError: Dispatch<SetStateAction<boolean>>;
-  wholeAppError: Dispatch<SetStateAction<boolean>>;
-};
+// type LayoutProps = {
+//   throwFetchError: Dispatch<SetStateAction<boolean>>;
+//   wholeAppError: Dispatch<SetStateAction<boolean>>;
+// };
 
 export type {
   APIResponse,
   // SelectorAndInputProps,
-  MainProps,
+  // MainProps,
   // APIResults,
   FieldsToShow,
   Data,
   ErrorBoundaryProps,
   ErrorBoundaryState,
   ButtonBlockProps,
-  LayoutProps,
+  // LayoutProps,
   // Species,
 };

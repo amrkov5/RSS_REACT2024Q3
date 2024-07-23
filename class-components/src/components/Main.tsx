@@ -10,12 +10,14 @@ import { useLazyGetItemsQuery } from '../slices/apiSlice';
 import { selectPageNum, selectText, selectType } from '../slices/headerSlice';
 import { selectItemsArr } from '../slices/selectedItemsSlice';
 import FLyout from './FlyoutComponent';
+import { selectFetchError } from '../slices/errorSlice';
 
-function Main({ fetchError }: { fetchError: boolean }): ReactNode {
+function Main(): ReactNode {
   const type = useSelector(selectType);
   const text = useSelector(selectText);
   const page = useSelector(selectPageNum);
   const selectedArr = useSelector(selectItemsArr);
+  const fetchError = useSelector(selectFetchError);
 
   const [trigger, { data, isLoading, isFetching, isSuccess, isError }] =
     useLazyGetItemsQuery();
@@ -26,7 +28,7 @@ function Main({ fetchError }: { fetchError: boolean }): ReactNode {
       query: text,
       page,
     });
-  }, [type, text, page, trigger]);
+  }, [type, text, page, trigger, fetchError]);
 
   let areButtonsNeeded = false;
   let content;

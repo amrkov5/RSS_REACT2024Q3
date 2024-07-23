@@ -14,7 +14,7 @@ describe('Flyout tests', () => {
     const { getByTestId } = render(
       <BrowserRouter>
         <Provider store={store}>
-          <Main fetchError={false} />
+          <Main />
         </Provider>
       </BrowserRouter>
     );
