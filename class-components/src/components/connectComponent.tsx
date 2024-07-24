@@ -31,7 +31,7 @@ const ConnectError = connector((props: ConnectErrorProps) => {
       fetchError={props.fetchError}
       appError={props.appError}
       msg={props.msg}
-      theme={theme!.theme}
+      theme={theme?.theme ? theme.theme : 'dark'}
     >
       {props.children}
     </ErrorBoundary>
