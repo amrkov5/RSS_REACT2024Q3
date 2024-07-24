@@ -1,5 +1,7 @@
 import { Component, ReactNode } from 'react';
 import { ErrorBoundaryProps, ErrorBoundaryState } from '../types';
+import '../index.css';
+import '../App.css';
 
 function reload() {
   window.location.reload();
@@ -24,10 +26,10 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   render(): ReactNode {
     const { error } = this.state;
-    const { msg, children, fetchError, appError } = this.props;
+    const { msg, children, fetchError, appError, theme } = this.props;
     if (error) {
       return (
-        <div className="error-wrapper">
+        <div className="error-wrapper" data-theme={theme}>
           <h2>{msg}</h2>
           {fetchError && (
             <button

@@ -159,6 +159,7 @@ type ErrorBoundaryProps = {
   fetchError: boolean;
   appError: boolean;
   fetchErrorFn: () => void;
+  theme: string;
 };
 
 type ErrorBoundaryState = {
