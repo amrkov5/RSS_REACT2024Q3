@@ -8,7 +8,7 @@ import { updateIsLoading, updateShowLoader } from '../slices/headerSlice';
 function ButtonsBlock({ next }: ButtonBlockProps): ReactNode {
   const theme = useContext(ThemeContext);
   const router = useRouter();
-  const [page, setPage] = useState(router.query.page || 1);
+  const [page, setPage] = useState(Number(router.query.page) || 1);
   const dispatch = useDispatch();
 
   const handleNext = (): void => {
@@ -29,10 +29,10 @@ function ButtonsBlock({ next }: ButtonBlockProps): ReactNode {
     router.push({ query: newQuery });
   };
   return (
-    <div className="buttons-block">
+    <div className="buttons-block" data-testid="buttons-block">
       <button
         type="button"
-        disabled={page === '1'}
+        disabled={page === 1}
         onClick={handlePrev}
         className="pagination-button"
         data-theme={theme?.theme}
