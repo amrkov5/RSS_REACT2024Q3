@@ -1,6 +1,7 @@
 import {
   fireEvent,
   render,
+  waitFor,
   waitForElementToBeRemoved,
   within,
 } from '@testing-library/react';
@@ -124,6 +125,10 @@ describe('Single card tests', () => {
 
     fireEvent.click(cards[0]);
     const outlet = getByTestId('outlet');
+
+    await waitFor(() => {
+      expect(outlet).toBeInTheDocument();
+    });
 
     await waitForElementToBeRemoved(within(outlet).getByTestId('loader'));
 
