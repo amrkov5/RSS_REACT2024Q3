@@ -14,7 +14,7 @@
     "preview": "vite preview",
     "prepare": "cd .. && husky install class-components/.husky",
     "type-check": "tsc --noEmit",
-    "test": "vitest",
+    "test": "vitest run",
     "coverage": "vitest run --coverage"
   },
   "lint-staged": {
