@@ -2,13 +2,11 @@
   box-sizing: border-box;
 }
 
-.app {
+#__next {
   display: flex;
   flex-direction: column;
   width: 100%;
   flex-grow: 1;
-  color: var(--color);
-  background-color: var(--bg-color);
 }
 .header {
   display: flex;
@@ -16,6 +14,9 @@
   align-items: center;
   height: 110px;
   padding: 20px;
+  background-color: var(--bg-color);
+  color: var(--color);
+  transition: 0.1s ease-in-out;
 }
 .header-link {
   font-size: 30px;
@@ -66,6 +67,7 @@ form {
   box-shadow: var(--btns-shadow);
   border: none;
   border-radius: 5px;
+  transition: 0.1s ease-in-out;
 }
 .search-input:focus,
 .search-input:active {
@@ -94,12 +96,17 @@ form {
   margin-left: 10px;
   background-color: var(--selector-bg-color);
   color: var(--color);
+  transition: 0.1s ease-in-out;
 }
 .main {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   flex-direction: column;
+  flex-grow: 1;
   padding: 20px;
+  background-color: var(--bg-color);
+  color: var(--color);
+  transition: 0.1s ease-in-out;
 }
 .buttons-block {
   margin: 0 auto;
@@ -196,7 +203,7 @@ form {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 0;
+  z-index: -1;
 }
 .single-card {
   position: sticky;
@@ -213,11 +220,14 @@ form {
 }
 .loader_wrapper {
   display: inline-block;
+  flex-grow: 1;
+  width: 100%;
   position: relative;
   align-self: center;
   height: 100px;
   margin: 0 auto;
-  filter: drop-shadow(0 0 1px yellow);
+  background-color: var(--bg-color);
+  transition: 0.1s ease-in-out;
 }
 .text {
   position: absolute;
@@ -232,8 +242,13 @@ form {
 }
 
 .loader {
+  position: absolute;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+  transform: translate(-50%, -50%);
   width: 100px;
   height: 100px;
+  filter: drop-shadow(0 0 1px yellow);
   animation: flip 2s linear infinite;
 }
 .loader path {
@@ -279,7 +294,10 @@ form {
   justify-content: center;
   width: 100vw;
   height: 100vw;
-  color: yellow;
+  color: var(--accent-color);
+  background-color: var(--bg-color);
+  text-shadow: var(--btns-shadow);
+  transition: 0.1s ease-in-out;
 }
 .container {
   display: flex;
@@ -372,4 +390,7 @@ input:checked + .slider:before {
   border: 1px solid var(--accent-color);
   border-radius: 15px;
   box-shadow: var(--btns-shadow);
+}
+.not-found-block {
+  text-align: center;
 }

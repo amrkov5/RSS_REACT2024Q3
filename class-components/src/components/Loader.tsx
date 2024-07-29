@@ -1,8 +1,14 @@
-import { ReactNode } from 'react';
+import { ReactNode, useContext } from 'react';
+import { ThemeContext } from './ThemeContext';
 
 function Loader(): ReactNode {
+  const theme = useContext(ThemeContext);
   return (
-    <span className="loader_wrapper" data-testid="loader">
+    <span
+      className="loader_wrapper"
+      data-testid="loader"
+      data-theme={theme?.theme}
+    >
       <svg
         viewBox="-50 -50 700 700"
         className="loader"

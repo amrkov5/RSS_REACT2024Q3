@@ -8,6 +8,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "types": ["vitest/globals", "@testing-library/jest-dom"],
+    "plugins": [{ "name": "next" }],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -25,5 +26,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/test/msw/**/*"]
+  "include": [
+    "src",
+    "src/test/msw/**/*",
+    "./dist/types/**/*.ts",
+    "./next-env.d.ts"
+  ],
+  "exclude": ["./node_modules"]
 }

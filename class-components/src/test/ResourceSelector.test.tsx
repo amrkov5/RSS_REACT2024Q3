@@ -1,18 +1,57 @@
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
+import { configureStore } from '@reduxjs/toolkit';
 import ResourceSelector from '../components/ResourceSelector';
-import store from '../store';
-import { updateType } from '../slices/headerSlice';
+import headerReducer from '../slices/headerSlice';
+import selectedItemsReducer from '../slices/selectedItemsSlice';
+import errorsReducer from '../slices/errorSlice';
 
 describe('Resource selector tests', () => {
+  vi.mock('next/router', () => {
+    return {
+      __esModule: true,
+      useRouter: () => ({
+        route: '/',
+        pathname: '',
+        query: { type: 'species' },
+        asPath: '',
+        push: vi.fn(),
+        replace: vi.fn(),
+        reload: vi.fn(),
+        back: vi.fn(),
+        prefetch: vi.fn().mockResolvedValue(undefined),
+        beforePopState: vi.fn(),
+        events: {
+          on: vi.fn(),
+          off: vi.fn(),
+          emit: vi.fn(),
+        },
+      }),
+    };
+  });
+  const store = configureStore({
+    reducer: {
+      header: headerReducer,
+      selectedItems: selectedItemsReducer,
+      errors: errorsReducer,
+    },
+    preloadedState: {
+      header: {
+        type: '',
+        text: '',
+        page: 1,
+        singleId: null,
+        shallShowLoader: true,
+        isLoading: false,
+      },
+      selectedItems: { selectedArr: [] },
+      errors: { fetchError: false, wholeAppError: false },
+    },
+  });
   it('Should render Resource selector', () => {
-    store.dispatch(updateType({ type: 'species' }));
     const { getByText, getByTestId } = render(
       <Provider store={store}>
-        <MemoryRouter initialEntries={[`/RSS_REACT2024Q3/species`]}>
-          <ResourceSelector />
-        </MemoryRouter>
+        <ResourceSelector />
       </Provider>
     );
 

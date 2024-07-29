@@ -1,14 +1,14 @@
 import { ReactNode } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 import { clearList, selectItemsArr } from '../slices/selectedItemsSlice';
 import downloadCSV from '../service/downloadCSV';
-import { selectType } from '../slices/headerSlice';
-import '../App.css';
 
 function FLyout(): ReactNode {
+  const router = useRouter();
   const dispatch = useDispatch();
   const selectedArr = useSelector(selectItemsArr);
-  const type = useSelector(selectType);
+  const { type } = router.query;
 
   return (
     <div className="flyout-wrapper" data-testid="flyout">
@@ -20,7 +20,7 @@ function FLyout(): ReactNode {
         <button
           className="flyout-btn"
           type="button"
-          onClick={() => downloadCSV(selectedArr, type)}
+          onClick={() => downloadCSV(selectedArr, type as string)}
         >
           Download
         </button>

@@ -1,21 +1,23 @@
 import { ReactNode, useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import useDataFromLS from '../hooks/useDataFromLS';
-import { updatePage, updateText } from '../slices/headerSlice';
+import { useRouter } from 'next/router';
 import { ThemeContext } from './ThemeContext';
-import '../index.css';
+import { clearList } from '../slices/selectedItemsSlice';
+import { updateIsLoading, updateShowLoader } from '../slices/headerSlice';
 
 function InputBlock(): ReactNode {
   const dispatch = useDispatch();
-  const [textToLS, setTextToLS] = useDataFromLS('text');
-  const [text, setText] = useState(textToLS);
+  const router = useRouter();
+  const [text, setText] = useState(router.query.search || '');
   const theme = useContext(ThemeContext);
 
   const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setTextToLS(text);
-    dispatch(updateText({ text }));
-    dispatch(updatePage({ page: 1 }));
+    dispatch(updateShowLoader(true));
+    dispatch(updateIsLoading(true));
+    dispatch(clearList());
+    const newQuery = { ...router.query, search: text };
+    router.push({ query: newQuery });
   };
 
   return (

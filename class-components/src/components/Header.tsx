@@ -1,42 +1,23 @@
-import { ReactNode, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { ReactNode, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ResourceSelector from './ResourceSelector';
 import InputBlock from './InputBlock';
-import {
-  selectPageNum,
-  selectSingleId,
-  selectText,
-  selectType,
-} from '../slices/headerSlice';
 import { ThemeContext } from './ThemeContext';
-import '../index.css';
 import ThemeSwitcher from './ThemeSwitcher';
-import { toggleAppError, toggleFetchError } from '../slices/errorSlice';
+import {
+  selectWholeAppError,
+  toggleAppError,
+  toggleFetchError,
+} from '../slices/errorSlice';
 
 function Header(): ReactNode {
   const dispatch = useDispatch();
-  const typeFromStore = useSelector(selectType);
-  const textFromStore = useSelector(selectText);
-  const pageFromStore = useSelector(selectPageNum);
-  const singleIdFromStore = useSelector(selectSingleId);
-  const navigate = useNavigate();
   const theme = useContext(ThemeContext);
+  const appError = useSelector(selectWholeAppError);
 
-  const pageNum = pageFromStore > 1 ? `page=${pageFromStore}` : '';
-  const searchQuery = textFromStore ? `search=${textFromStore}` : '';
-  const isQuerySymbolNeeded = pageFromStore || textFromStore ? '?' : '';
-  const isAndSymbolNeeded = pageFromStore > 1 && textFromStore ? '&' : '';
-
-  useEffect(() => {
-    let typeNav = `./${typeFromStore}?${pageNum}`;
-    if (singleIdFromStore) {
-      typeNav = `./${typeFromStore}/card/${singleIdFromStore}`;
-    } else {
-      typeNav = `./${typeFromStore}${isQuerySymbolNeeded}${searchQuery}${isAndSymbolNeeded}${pageNum}`;
-    }
-    navigate(typeNav);
-  }, [textFromStore, typeFromStore, pageFromStore, singleIdFromStore]);
+  if (appError) {
+    throw new Error('Whole app error');
+  }
 
   return (
     <header className="header" data-testid="header" data-theme={theme?.theme}>

@@ -4,7 +4,9 @@ type HeaderState = {
   type: string;
   text: string;
   page: number;
-  singleId: number;
+  singleId: number | null;
+  shallShowLoader: boolean;
+  isLoading: boolean;
 };
 
 type ErrorState = {

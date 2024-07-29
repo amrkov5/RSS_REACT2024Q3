@@ -1,13 +1,35 @@
 import { expect } from 'vitest';
 import { fireEvent, render } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import Card from '../components/Card';
 import { mockAPIResponse } from './mockdata';
 import { addItem, removeItem } from '../slices/selectedItemsSlice';
+import { Species } from '../types';
 
 describe('Card tests', () => {
+  vi.mock('next/router', () => {
+    return {
+      __esModule: true,
+      useRouter: () => ({
+        route: '/',
+        pathname: '',
+        query: { type: 'species' },
+        asPath: '',
+        push: vi.fn(),
+        replace: vi.fn(),
+        reload: vi.fn(),
+        back: vi.fn(),
+        prefetch: vi.fn().mockResolvedValue(undefined),
+        beforePopState: vi.fn(),
+        events: {
+          on: vi.fn(),
+          off: vi.fn(),
+          emit: vi.fn(),
+        },
+      }),
+    };
+  });
   const mockStore = configureMockStore();
   const mockedStore = mockStore({
     header: {
@@ -23,29 +45,33 @@ describe('Card tests', () => {
 
   it('renders Card', () => {
     const { getByTestId } = render(
-      <BrowserRouter>
-        <Provider store={mockedStore}>
-          <Card data={mockAPIResponse.results[0]} />
-        </Provider>
-      </BrowserRouter>
+      <Provider store={mockedStore}>
+        <Card data={mockAPIResponse.results[0]} resource="species" />
+      </Provider>
     );
     expect(getByTestId('card')).toBeInTheDocument();
   });
 
   it('should render cart info correctly', () => {
     const { getByText } = render(
-      <BrowserRouter>
-        <Provider store={mockedStore}>
-          <Card data={mockAPIResponse.results[0]} />
-        </Provider>
-      </BrowserRouter>
+      <Provider store={mockedStore}>
+        <Card data={mockAPIResponse.results[0]} resource="species" />
+      </Provider>
     );
 
-    const name = getByText(mockAPIResponse.results[0].name);
-    const classification = getByText(mockAPIResponse.results[0].classification);
-    const height = getByText(mockAPIResponse.results[0].average_height);
-    const lifespan = getByText(mockAPIResponse.results[0].average_lifespan);
-    const language = getByText(mockAPIResponse.results[0].language);
+    const name = getByText((mockAPIResponse.results[0] as Species).name);
+    const classification = getByText(
+      (mockAPIResponse.results[0] as Species).classification
+    );
+    const height = getByText(
+      (mockAPIResponse.results[0] as Species).average_height
+    );
+    const lifespan = getByText(
+      (mockAPIResponse.results[0] as Species).average_lifespan
+    );
+    const language = getByText(
+      (mockAPIResponse.results[0] as Species).language
+    );
     expect(name).toBeInTheDocument();
     expect(classification).toBeInTheDocument();
     expect(height).toBeInTheDocument();
@@ -56,11 +82,9 @@ describe('Card tests', () => {
   it('should change state correctly and rerender card with checked checkbox', () => {
     vi.spyOn(mockedStore, 'dispatch');
     const { getByTestId } = render(
-      <BrowserRouter>
-        <Provider store={mockedStore}>
-          <Card data={mockAPIResponse.results[0]} />
-        </Provider>
-      </BrowserRouter>
+      <Provider store={mockedStore}>
+        <Card data={mockAPIResponse.results[0]} resource="species" />
+      </Provider>
     );
 
     const selector = getByTestId('card-selector');
@@ -83,11 +107,9 @@ describe('Card tests', () => {
     });
 
     const { getAllByTestId: getByTestIdAfterUpdate } = render(
-      <BrowserRouter>
-        <Provider store={updatedStore}>
-          <Card data={mockAPIResponse.results[0]} />
-        </Provider>
-      </BrowserRouter>
+      <Provider store={updatedStore}>
+        <Card data={mockAPIResponse.results[0]} resource="species" />
+      </Provider>
     );
 
     const selectorAfterUpdate = getByTestIdAfterUpdate('card-selector');
@@ -109,11 +131,9 @@ describe('Card tests', () => {
 
     vi.spyOn(storeWithSelectedCard, 'dispatch');
     const { getByTestId } = render(
-      <BrowserRouter>
-        <Provider store={storeWithSelectedCard}>
-          <Card data={mockAPIResponse.results[0]} />
-        </Provider>
-      </BrowserRouter>
+      <Provider store={storeWithSelectedCard}>
+        <Card data={mockAPIResponse.results[0]} resource="species" />
+      </Provider>
     );
 
     const selector = getByTestId('card-selector');
@@ -136,11 +156,9 @@ describe('Card tests', () => {
     });
 
     const { getAllByTestId } = render(
-      <BrowserRouter>
-        <Provider store={updatedStore}>
-          <Card data={mockAPIResponse.results[0]} />
-        </Provider>
-      </BrowserRouter>
+      <Provider store={updatedStore}>
+        <Card data={mockAPIResponse.results[0]} resource="species" />
+      </Provider>
     );
 
     const selectorAfterUpdate = getAllByTestId('card-selector');

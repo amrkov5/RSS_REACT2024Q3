@@ -1,7 +1,5 @@
 import { Component, ReactNode } from 'react';
 import { ErrorBoundaryProps, ErrorBoundaryState } from '../types';
-import '../index.css';
-import '../App.css';
 
 function reload() {
   window.location.reload();
@@ -36,12 +34,18 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
               onClick={this.retry}
               className="try-again-btn"
               type="button"
+              data-testid="fetch-error"
             >
               Try Again
             </button>
           )}
           {appError && (
-            <button onClick={reload} className="try-again-btn" type="button">
+            <button
+              onClick={reload}
+              className="try-again-btn"
+              type="button"
+              data-testid="app-error"
+            >
               Try Again
             </button>
           )}

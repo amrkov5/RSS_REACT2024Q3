@@ -1,25 +1,63 @@
-import { render, waitForElementToBeRemoved } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
-import store from '../store';
-import { updateType } from '../slices/headerSlice';
-import Main from '../components/Main';
-import { addItem } from '../slices/selectedItemsSlice';
+import { configureStore } from '@reduxjs/toolkit';
 import { mockAPIResponse } from './mockdata';
+import Main from '../pages';
+import headerReducer from '../slices/headerSlice';
+import selectedItemsReducer, { addItem } from '../slices/selectedItemsSlice';
+import errorsReducer from '../slices/errorSlice';
 
 describe('Flyout tests', () => {
+  vi.mock('next/router', () => {
+    return {
+      __esModule: true,
+      useRouter: () => ({
+        route: '/',
+        pathname: '',
+        query: { type: 'species' },
+        asPath: '',
+        push: vi.fn(),
+        replace: vi.fn(),
+        reload: vi.fn(),
+        back: vi.fn(),
+        prefetch: vi.fn().mockResolvedValue(undefined),
+        beforePopState: vi.fn(),
+        events: {
+          on: vi.fn(),
+          off: vi.fn(),
+          emit: vi.fn(),
+        },
+      }),
+    };
+  });
+
+  const store = configureStore({
+    reducer: {
+      header: headerReducer,
+      selectedItems: selectedItemsReducer,
+      errors: errorsReducer,
+    },
+    preloadedState: {
+      header: {
+        type: '',
+        text: '',
+        page: 1,
+        singleId: null,
+        shallShowLoader: true,
+        isLoading: true,
+      },
+      selectedItems: { selectedArr: [mockAPIResponse.results[0]] },
+      errors: { fetchError: false, wholeAppError: false },
+    },
+  });
+
   it('Should render Flyout', async () => {
     store.dispatch(addItem(mockAPIResponse.results[0]));
-    store.dispatch(updateType({ type: 'species' }));
     const { getByTestId } = render(
-      <BrowserRouter>
-        <Provider store={store}>
-          <Main />
-        </Provider>
-      </BrowserRouter>
+      <Provider store={store}>
+        <Main info={mockAPIResponse} />
+      </Provider>
     );
-
-    await waitForElementToBeRemoved(getByTestId('loader'));
 
     const flyout = getByTestId('flyout');
     expect(flyout).toBeInTheDocument();

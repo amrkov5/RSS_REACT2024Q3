@@ -1,18 +1,5 @@
 import { ReactNode } from 'react';
 
-// type HeaderProps = {
-//   throwFetchError: Dispatch<SetStateAction<boolean>>;
-//   wholeAppError: Dispatch<SetStateAction<boolean>>;
-// };
-
-// type SelectorAndInputProps = {
-//   onChange: Dispatch<SetStateAction<string>>;
-// };
-
-// type MainProps = {
-//   fetchError: null | boolean;
-// };
-
 type Movies = {
   title: string;
   episode_id: number;
@@ -102,6 +89,7 @@ type Species = {
   eye_colors: string;
   skin_colors: string;
   language: string;
+  hair_colors: string;
   homeworld: string;
   people: string[];
   films: string[];
@@ -138,11 +126,6 @@ interface APIResponse {
 }
 
 type Data = Movies | People | Starships | Species | Vehicles | Planets;
-// type APIResults = {
-//   data: Data;
-//   resource: keyof FieldsToShow;
-//   onClick?: (link: string, name: string) => void;
-// };
 
 type FieldsToShow = {
   films: string[];
@@ -170,21 +153,12 @@ type ButtonBlockProps = {
   next: string;
 };
 
-// type LayoutProps = {
-//   throwFetchError: Dispatch<SetStateAction<boolean>>;
-//   wholeAppError: Dispatch<SetStateAction<boolean>>;
-// };
-
 export type {
   APIResponse,
-  // SelectorAndInputProps,
-  // MainProps,
-  // APIResults,
   FieldsToShow,
   Data,
+  Species,
   ErrorBoundaryProps,
   ErrorBoundaryState,
   ButtonBlockProps,
-  // LayoutProps,
-  // Species,
 };

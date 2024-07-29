@@ -1,4 +1,6 @@
-const mockAPIResponse = {
+import { APIResponse } from '../types';
+
+const mockAPIResponse: APIResponse = {
   count: 20,
   next: 'https://swapi.dev/api/species/?search=n&page=2',
   previous: null,
@@ -199,7 +201,7 @@ const mockAPIResponse = {
   ],
 };
 
-const emptyResponse = {
+const emptyResponse: APIResponse = {
   count: 0,
   next: null,
   previous: null,

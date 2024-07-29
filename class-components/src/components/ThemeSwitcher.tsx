@@ -12,9 +12,14 @@ export default function ThemeSwitcher(): ReactNode {
     }
   };
   return (
-    <div className="container">
+    <div className="container" data-testid="theme-switcher">
       <label htmlFor="slider" id="switch" className="switch">
-        <input type="checkbox" onChange={switchTheme} id="slider" />
+        <input
+          type="checkbox"
+          onChange={switchTheme}
+          id="slider"
+          data-testid="theme-checkbox"
+        />
         <span className="slider round" />
       </label>
     </div>
