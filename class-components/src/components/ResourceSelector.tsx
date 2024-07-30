@@ -3,17 +3,19 @@ import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { clearList } from '../slices/selectedItemsSlice';
 import { updateIsLoading, updateShowLoader } from '../slices/headerSlice';
+import useDataFromLS from '../hooks/useDataFromLS';
 
 function ResourceSelector(): ReactNode {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [typeFromLS, setTypeFromLS] = useDataFromLS('type');
 
   const onSetType = (value: string) => {
     const newQuery = { ...router.query, type: value, page: 1 };
     dispatch(clearList());
     dispatch(updateShowLoader(true));
     dispatch(updateIsLoading(true));
-
+    setTypeFromLS(value);
     router.push({ query: newQuery });
   };
 
@@ -25,7 +27,7 @@ function ResourceSelector(): ReactNode {
         onChange={(e) => {
           onSetType(e.target.value);
         }}
-        value={router.query.type || 'people'}
+        value={typeFromLS || 'people'}
         className="resource-selector"
         data-testid="type-selector"
       >

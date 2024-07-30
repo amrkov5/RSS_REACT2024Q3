@@ -6,12 +6,15 @@ import Layout from '../components/Layout';
 import ThemeProvider from '../components/ThemeContext';
 import ConnectError from '../components/connectComponent';
 import withRedux from '../redux';
+import useDataFromLS from '../hooks/useDataFromLS';
 import '../index.css';
 import '../App.css';
 
 export function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [isRedirectReady, setIsRedirectReady] = useState(false);
+  const [typeFromLS] = useDataFromLS('type');
+  const [searchFromLS] = useDataFromLS('search');
 
   function createRouterQuery() {
     if (pageProps.info) {
@@ -20,11 +23,11 @@ export function App({ Component, pageProps }: AppProps) {
         search?: string | string[];
         page?: string | string[];
       } = {
-        type: router.query.type || 'people',
+        type: typeFromLS,
       };
 
-      if (router.query.search) {
-        query.search = router.query.search;
+      if (searchFromLS) {
+        query.search = searchFromLS;
       }
       if (pageProps.info.next || pageProps.info.previous) {
         query.page = router.query.page || '1';

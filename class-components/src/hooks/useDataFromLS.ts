@@ -1,21 +1,27 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
 function useDataFromLS(
   key: string
-): [string, React.Dispatch<React.SetStateAction<string>>] {
-  const { resourceType } = useParams();
+): [
+  string | string[],
+  React.Dispatch<React.SetStateAction<string | string[]>>,
+] {
+  const { type, search } = useRouter().query;
   const [text, setText] = useState(() => {
-    if (key === 'type') {
-      if (resourceType) {
-        return resourceType;
-      }
-      return 'people';
+    let returnedValue;
+    if (typeof window === 'undefined') {
+      returnedValue = key === 'type' ? type || 'people' : search || '';
+    } else {
+      returnedValue =
+        key === 'type'
+          ? type || window.localStorage.getItem(key) || 'people'
+          : search || window.localStorage.getItem(key) || '';
     }
-    return '';
+    return returnedValue;
   });
   useEffect(() => {
-    localStorage.setItem(key, text);
+    localStorage.setItem(key, text as string);
   }, [key, text]);
 
   return [text, setText];

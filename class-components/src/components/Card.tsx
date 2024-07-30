@@ -58,6 +58,7 @@ function Card({
       onClick={(e) => handleClick(e, data.url)}
       className="card"
       data-testid="card"
+      data-theme={theme?.theme}
     >
       <h3 className="card-heading">
         <span

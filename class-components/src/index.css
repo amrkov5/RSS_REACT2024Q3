@@ -17,6 +17,7 @@
   --btns-border-light: none;
   --btns-shadow-light: 0 0 3px #000000;
   --selector-bg-color-light: #f0eaea;
+  --card-box-shadow-light: 0 0 3px #000000;
 
   --bg-color-dark: #242424;
   --color-dark: #f0eaea;
@@ -24,26 +25,32 @@
   --btns-border-dark: none;
   --btns-shadow-dark: none;
   --selector-bg-color-dark: #393838;
+  --card-box-shadow-dark: 0 0 3px #f0eaea;
+  --error-btn-color: #000000;
 }
 
 [data-theme='light'] {
   --bg-color: var(--bg-color-light);
   --color: var(--color-light);
-  --btn-color: var(var(--btn-color));
+  --btn-color: var(--btn-color);
   --btns-background: var(--btns-background-light);
   --btns-border: var(--btns-border-light);
   --btns-shadow: var(--btns-shadow-light);
   --selector-bg-color: var(--selector-bg-color-light);
+  --card-shadow: var(var(--card-box-shadow-light));
+  --error-btn-color: var(--error-btn-color);
 }
 
 [data-theme='dark'] {
   --bg-color: var(--bg-color-dark);
   --color: var(--color-dark);
-  --btn-color: var(var(--btn-color));
+  --btn-color: var(--btn-color);
   --btns-background: var(--btns-background-dark);
   --btns-border: var(--btns-border-dark);
   --btns-shadow: var(--btns-shadow-dark);
   --selector-bg-color: var(--selector-bg-color-dark);
+  --card-shadow: var(--card-box-shadow-dark);
+  --error-btn-color: var(--error-btn-color);
 }
 
 body {

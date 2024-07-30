@@ -4,11 +4,13 @@ import { useRouter } from 'next/router';
 import { ThemeContext } from './ThemeContext';
 import { clearList } from '../slices/selectedItemsSlice';
 import { updateIsLoading, updateShowLoader } from '../slices/headerSlice';
+import useDataFromLS from '../hooks/useDataFromLS';
 
 function InputBlock(): ReactNode {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [text, setText] = useState(router.query.search || '');
+  const [textFromLS, setTypeFromLS] = useDataFromLS('search');
+  const [text, setText] = useState(textFromLS || '');
   const theme = useContext(ThemeContext);
 
   const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
@@ -16,6 +18,7 @@ function InputBlock(): ReactNode {
     dispatch(updateShowLoader(true));
     dispatch(updateIsLoading(true));
     dispatch(clearList());
+    setTypeFromLS(text);
     const newQuery = { ...router.query, search: text };
     router.push({ query: newQuery });
   };

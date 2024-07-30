@@ -42,6 +42,7 @@
   border: none;
   border-radius: 5px;
   transition: transform 0.2s ease-in-out;
+  color: var(--error-btn-color);
 }
 .err-btn:hover {
   transform: scale(1.03);
@@ -100,7 +101,6 @@ form {
 }
 .main {
   display: flex;
-  /* justify-content: center; */
   flex-direction: column;
   flex-grow: 1;
   padding: 20px;
@@ -159,6 +159,11 @@ form {
   padding: 10px;
   border: 1px solid gray;
   align-items: flex-start;
+}
+.card:hover {
+  box-shadow: var(--card-shadow);
+  cursor: pointer;
+  transform: scale(1.01);
 }
 .card-heading {
   margin: 0;
