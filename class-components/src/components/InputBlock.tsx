@@ -10,7 +10,7 @@ function InputBlock(): ReactNode {
   const dispatch = useDispatch();
   const router = useRouter();
   const [textFromLS, setTypeFromLS] = useDataFromLS('search');
-  const [text, setText] = useState(textFromLS || '');
+  const [text, setText] = useState(router.query.search || textFromLS || '');
   const theme = useContext(ThemeContext);
 
   const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,7 +31,7 @@ function InputBlock(): ReactNode {
       <input
         className="search-input"
         type="text"
-        value={router.query.search || textFromLS || ''}
+        value={text}
         onChange={(e) => setText(e.target.value)}
         data-testid="search-text"
       />

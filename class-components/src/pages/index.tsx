@@ -26,11 +26,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const results = await res.json();
   results.resource = type || 'people';
   const info = await results;
-  info.results.forEach((el: Data) => {
-    const elWithid = el;
-    elWithid.id = String(Date.parse(el.created));
-    return elWithid;
-  });
+  if (!info.detail) {
+    info.results.forEach((el: Data) => {
+      const elWithid = el;
+      elWithid.id = String(Date.parse(el.created));
+      return elWithid;
+    });
+  }
+
   return { props: { info } };
 }
 
@@ -81,7 +84,7 @@ export default function Main({ info }: { info: APIResponse }): ReactNode {
     }
   }, [router, singleId]);
   let content;
-  if (info) {
+  if (info && !info.detail) {
     content = info.results.map((el: Data) => (
       <Card data={el} key={Date.parse(el.created)} resource={info.resource} />
     ));
@@ -94,7 +97,9 @@ export default function Main({ info }: { info: APIResponse }): ReactNode {
   return (
     <main className="main" data-testid="main" data-theme={theme?.theme}>
       {(info.next || info.previous) && <ButtonsBlock next={info.next!} />}
-      {info.results.length === 0 && !isLoading && <NotFoundBlock />}
+      {(info.detail || info.results.length === 0) && !isLoading && (
+        <NotFoundBlock />
+      )}
       {isLoading && <Loader />}
       <div className="cards-outlet-wrapper">
         <div className="cards-wrapper">{!isLoading && content}</div>

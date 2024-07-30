@@ -123,6 +123,7 @@ interface APIResponse {
   previous: string | null;
   resource: keyof FieldsToShow;
   results: Data[];
+  detail?: string;
 }
 
 type Data = Movies | People | Starships | Species | Vehicles | Planets;
