@@ -31,7 +31,7 @@ function InputBlock(): ReactNode {
       <input
         className="search-input"
         type="text"
-        value={text || ''}
+        value={router.query.search || textFromLS || ''}
         onChange={(e) => setText(e.target.value)}
         data-testid="search-text"
       />
