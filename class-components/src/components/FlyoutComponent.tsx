@@ -1,3 +1,5 @@
+'use client';
+
 import { ReactNode } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';

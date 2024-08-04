@@ -11,7 +11,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import SingleCard from '../components/SingleCard';
 import { mockAPIResponse } from './mockdata';
 import { Species } from '../types';
-import Main from '../pages';
+import Main from '../pag/___in';
 import headerReducer, { updateType } from '../slices/headerSlice';
 import selectedItemsReducer from '../slices/selectedItemsSlice';
 import errorsReducer from '../slices/errorSlice';

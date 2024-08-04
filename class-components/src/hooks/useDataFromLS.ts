@@ -1,13 +1,12 @@
-import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 function useDataFromLS(
   key: string
-): [
-  string | string[],
-  React.Dispatch<React.SetStateAction<string | string[]>>,
-] {
-  const { type, search } = useRouter().query;
+): [string, React.Dispatch<React.SetStateAction<string>>] {
+  const searchParams = useSearchParams();
+  const type = searchParams.get('type');
+  const search = searchParams.get('search');
   const [text, setText] = useState(() => {
     let returnedValue;
     if (typeof window === 'undefined') {

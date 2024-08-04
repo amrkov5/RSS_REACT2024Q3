@@ -4,7 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import ThemeProvider from '../components/ThemeContext';
 import Layout from '../components/Layout';
 import { mockAPIResponse } from './mockdata';
-import Main from '../pages';
+import Main from '../pag/___in';
 import headerReducer from '../slices/headerSlice';
 import selectedItemsReducer from '../slices/selectedItemsSlice';
 import errorsReducer from '../slices/errorSlice';

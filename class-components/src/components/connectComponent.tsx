@@ -1,3 +1,5 @@
+'use client';
+
 import { connect, ConnectedProps } from 'react-redux';
 import { ReactNode, useContext } from 'react';
 import { toggleFetchError } from '../slices/errorSlice';

@@ -1,3 +1,5 @@
+'use client';
+
 import { ReactNode, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ResourceSelector from './ResourceSelector';

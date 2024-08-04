@@ -1,5 +1,7 @@
+'use client';
+
 import { ReactNode } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { clearList } from '../slices/selectedItemsSlice';
 import { updateIsLoading, updateShowLoader } from '../slices/headerSlice';
@@ -11,12 +13,14 @@ function ResourceSelector(): ReactNode {
   const [typeFromLS, setTypeFromLS] = useDataFromLS('type');
 
   const onSetType = (value: string) => {
-    const newQuery = { ...router.query, type: value, page: 1 };
+    const searchParams = useSearchParams();
+    console.log(searchParams);
+    const newQuery = { ...searchParams, type: value, page: 1 };
     dispatch(clearList());
     dispatch(updateShowLoader(true));
     dispatch(updateIsLoading(true));
     setTypeFromLS(value);
-    router.push({ query: newQuery });
+    router.push(`?${newQuery}`);
   };
 
   return (
