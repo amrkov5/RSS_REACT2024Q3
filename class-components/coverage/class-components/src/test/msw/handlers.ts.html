@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for class-components/src/pages/404.tsx</title>
+    <title>Code coverage report for class-components/src/test/msw/handlers.ts</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../../prettify.css" />
-    <link rel="stylesheet" href="../../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../../sort-arrow-sprite.png);
+            background-image: url(../../../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">class-components/src/pages</a> 404.tsx</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">class-components/src/test/msw</a> handlers.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/14</span>
+                <span class='fraction'>0/17</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/14</span>
+                <span class='fraction'>0/17</span>
             </div>
         
             
@@ -80,40 +80,46 @@
 <a name='L15'></a><a href='#L15'>15</a>
 <a name='L16'></a><a href='#L16'>16</a>
 <a name='L17'></a><a href='#L17'>17</a>
-<a name='L18'></a><a href='#L18'>18</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import { ReactNode, useContext } from 'react';</span></span></span>
-<span class="cstat-no" title="statement not covered" >import Link from 'next/link';</span>
-<span class="cstat-no" title="statement not covered" >import { ThemeContext } from '../components/ThemeContext';</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import { http, HttpResponse } from 'msw';</span></span></span>
+<span class="cstat-no" title="statement not covered" >import { emptyResponse, mockAPIResponse } from '../mockdata';</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >function NotFound(): ReactNode {</span>
-<span class="cstat-no" title="statement not covered" >  const theme = useContext(ThemeContext);</span>
-<span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;div className="not-found" data-theme={theme?.theme}&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;h1&gt;Oops. Not found...&lt;/h1&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;Link href="/?type=people&amp;page=1"&gt;Return to main&lt;/Link&gt;</span>
-<span class="cstat-no" title="statement not covered" >    &lt;/&gt;</span>
-  );
-<span class="cstat-no" title="statement not covered" >}</span>
+<span class="cstat-no" title="statement not covered" >const handlers = [</span>
+<span class="cstat-no" title="statement not covered" >  http.get('https://swapi.dev/api/species', () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return HttpResponse.json(mockAPIResponse);</span>
+<span class="cstat-no" title="statement not covered" >  }),</span>
+<span class="cstat-no" title="statement not covered" >  http.get('https://swapi.dev/api/people', () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return HttpResponse.json(mockAPIResponse);</span>
+<span class="cstat-no" title="statement not covered" >  }),</span>
+<span class="cstat-no" title="statement not covered" >  http.get('https://swapi.dev/api/nothing', () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return HttpResponse.json(emptyResponse);</span>
+<span class="cstat-no" title="statement not covered" >  }),</span>
+<span class="cstat-no" title="statement not covered" >  http.get('https://swapi.dev/api/species/1', () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return HttpResponse.json(mockAPIResponse.results[0]);</span>
+<span class="cstat-no" title="statement not covered" >  }),</span>
+<span class="cstat-no" title="statement not covered" >];</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export default NotFound;</span>
+<span class="cstat-no" title="statement not covered" >export default handlers;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -123,14 +129,14 @@
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at 2024-08-04T08:33:59.344Z
             </div>
-        <script src="../../../prettify.js"></script>
+        <script src="../../../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../../sorter.js"></script>
-        <script src="../../../block-navigation.js"></script>
+        <script src="../../../../sorter.js"></script>
+        <script src="../../../../block-navigation.js"></script>
     </body>
 </html>
     
