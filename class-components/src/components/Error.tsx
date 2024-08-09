@@ -19,9 +19,8 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   retry() {
-    const { fetchErrorFn } = this.props;
     this.setState({ error: false });
-    fetchErrorFn();
+    reload();
   }
 
   render(): ReactNode {

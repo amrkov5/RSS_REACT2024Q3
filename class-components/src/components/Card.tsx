@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useContext, useRef } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { Data, FieldsToShow } from '../types';
 import {
@@ -41,9 +41,7 @@ function Card({
     if (labelRef.current && !labelRef.current.contains(e.target as Node)) {
       dispatch(updateSingleId({ singleId: id }));
       dispatch(updateShowLoader(false));
-      router.push({ query: { type: router.query.type, id } }, undefined, {
-        shallow: true,
-      });
+      router.push(`/${resource}/card/${id}`);
     }
   };
 

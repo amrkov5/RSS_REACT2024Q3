@@ -140,10 +140,10 @@ type FieldsToShow = {
 type ErrorBoundaryProps = {
   msg: string;
   children: ReactNode;
-  fetchError: boolean;
-  appError: boolean;
-  fetchErrorFn: () => void;
-  theme: string;
+  fetchError?: boolean;
+  appError?: boolean;
+  // fetchErrorFn: () => void;
+  theme?: string;
 };
 
 type ErrorBoundaryState = {

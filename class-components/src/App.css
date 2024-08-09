@@ -102,7 +102,6 @@ form {
 }
 .main {
   display: flex;
-  flex-direction: column;
   flex-grow: 1;
   padding: 20px;
   background-color: var(--bg-color);
@@ -145,8 +144,10 @@ form {
 .single-card-btn {
   margin: 0 auto;
 }
-.cards-outlet-wrapper {
+.cards-btns-wrapper {
   display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 .cards-wrapper {
   display: flex;

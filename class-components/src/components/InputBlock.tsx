@@ -2,16 +2,16 @@
 
 import { ReactNode, useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { ThemeContext } from './ThemeContext';
 import { clearList } from '../slices/selectedItemsSlice';
 import { updateIsLoading, updateShowLoader } from '../slices/headerSlice';
 import useDataFromLS from '../hooks/useDataFromLS';
-import { useSearchParams } from 'next/navigation';
 
 function InputBlock(): ReactNode {
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
+  const pathParams = usePathname();
   const router = useRouter();
   const [textFromLS, setTypeFromLS] = useDataFromLS('search');
   const [text, setText] = useState(
@@ -25,12 +25,10 @@ function InputBlock(): ReactNode {
     dispatch(updateIsLoading(true));
     dispatch(clearList());
     setTypeFromLS(text);
-    console.log(searchParams);
-    const type = searchParams.get('type');
     const page = searchParams.get('page');
     const isSignNeeded = page || text ? '?' : '';
-    const newQuery = `?${type}${isSignNeeded}${text ? text : ''}`;
-    router.push(`?${newQuery}`);
+    const newQuery = `${pathParams}${isSignNeeded}${text ? `search=${text}` : ''}`;
+    router.push(newQuery);
   };
 
   return (

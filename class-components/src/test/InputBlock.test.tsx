@@ -1,33 +1,34 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import InputBlock from '../components/InputBlock';
 import headerReducer from '../slices/headerSlice';
 import selectedItemsReducer from '../slices/selectedItemsSlice';
 import errorsReducer from '../slices/errorSlice';
 
-vi.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '/',
-      pathname: '',
-      query: { search: 'testText' },
-      asPath: '',
-      push: vi.fn(),
-      replace: vi.fn(),
-      reload: vi.fn(),
+const routerMock = vi.fn();
+
+vi.mock('next/navigation', () => {
+  return {
+    __esModule: true,
+    useRouter: () => ({
       back: vi.fn(),
-      prefetch: vi.fn().mockResolvedValue(undefined),
-      beforePopState: vi.fn(),
-      events: {
-        on: vi.fn(),
-        off: vi.fn(),
-        emit: vi.fn(),
+      forward: vi.fn(),
+      push: routerMock,
+      replace: vi.fn(),
+      refresh: vi.fn(),
+      prefetch: vi.fn(),
+    }),
+    useSearchParams: () => ({
+      get: (param: string) => {
+        if (param === 'search') return 'testText';
+        return null;
       },
-    };
-  },
-}));
+    }),
+    usePathname: () => '/species',
+  };
+});
 
 describe('Search input tests', () => {
   const store = configureStore({
@@ -52,7 +53,7 @@ describe('Search input tests', () => {
 
   it('Should render search input with search params', () => {
     const router = useRouter();
-    router.push({ query: { search: 'testText' } });
+    router.push('/species?search=testText');
     const { getByTestId } = render(
       <Provider store={store}>
         <InputBlock />
@@ -64,22 +65,18 @@ describe('Search input tests', () => {
     );
   });
 
-  // it('should save the entered value to local storage on form submit', () => {
-  //   const { getByTestId } = render(
-  //     <Provider store={store}>
-  //       <MemoryRouter
-  //         initialEntries={[`/RSS_REACT2024Q3/species?search=testText`]}
-  //       >
-  //         <InputBlock />
-  //       </MemoryRouter>
-  //     </Provider>
-  //   );
-  //   const input = getByTestId('search-text');
-  //   const form = getByTestId('search-form');
+  it('should save the entered value to local storage on form submit', () => {
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <InputBlock />
+      </Provider>
+    );
+    const input = getByTestId('search-text');
+    const form = getByTestId('search-form');
 
-  //   fireEvent.change(input, { target: { value: 'test' } });
-  //   fireEvent.submit(form);
+    fireEvent.change(input, { target: { value: 'test' } });
+    fireEvent.submit(form);
 
-  //   expect(localStorage.getItem('text')).toBe('test');
-  // });
+    expect(localStorage.getItem('search')).toBe('test');
+  });
 });

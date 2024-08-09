@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useContext, useState } from 'react';
-import { useRouter } from 'next/router';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { ButtonBlockProps } from '../types';
 import { ThemeContext } from './ThemeContext';
@@ -10,7 +10,9 @@ import { updateIsLoading, updateShowLoader } from '../slices/headerSlice';
 function ButtonsBlock({ next }: ButtonBlockProps): ReactNode {
   const theme = useContext(ThemeContext);
   const router = useRouter();
-  const [page, setPage] = useState(Number(router.query.page) || 1);
+  const searchParams = useSearchParams();
+  const pathParams = usePathname();
+  const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
   const dispatch = useDispatch();
 
   const handleNext = (): void => {
@@ -18,17 +20,23 @@ function ButtonsBlock({ next }: ButtonBlockProps): ReactNode {
     dispatch(updateIsLoading(true));
     const curPage = Number(page) + 1;
     setPage(Number(page) + 1);
-    const newQuery = { ...router.query, page: curPage };
-    router.push({ query: newQuery });
+    const searchText = searchParams.get('search')
+      ? `?search=${searchParams.get('search')}`
+      : '';
+    const newQuery = `${pathParams}${searchText}${searchText ? `&page=${curPage}` : `?page=${curPage}`}`;
+    router.push(newQuery);
   };
 
   const handlePrev = (): void => {
     dispatch(updateShowLoader(true));
     dispatch(updateIsLoading(true));
     const curPage = Number(page) - 1;
+    const searchText = searchParams.get('search')
+      ? `?search=${searchParams.get('search')}`
+      : '';
     setPage(curPage);
-    const newQuery = { ...router.query, page: curPage };
-    router.push({ query: newQuery });
+    const newQuery = `${pathParams}${searchText}${searchText ? `&page=${curPage}` : `?page=${curPage}`}`;
+    router.push(newQuery);
   };
   return (
     <div className="buttons-block" data-testid="buttons-block">

@@ -5,30 +5,25 @@ import headerReducer from '../slices/headerSlice';
 import selectedItemsReducer from '../slices/selectedItemsSlice';
 import errorsReducer from '../slices/errorSlice';
 import { mockAPIResponse } from './mockdata';
-import Main from '../pag/___in';
+import Main from '../components/Main';
 
 const routerMock = vi.fn();
 
-vi.mock('next/router', () => {
+vi.mock('next/navigation', () => {
   return {
     __esModule: true,
     useRouter: () => ({
-      route: '/',
-      pathname: '',
-      query: { type: 'species' },
-      asPath: '',
+      back: vi.fn(),
+      forward: vi.fn(),
       push: routerMock,
       replace: vi.fn(),
-      reload: vi.fn(),
-      back: vi.fn(),
-      prefetch: vi.fn().mockResolvedValue(undefined),
-      beforePopState: vi.fn(),
-      events: {
-        on: vi.fn(),
-        off: vi.fn(),
-        emit: vi.fn(),
-      },
+      refresh: vi.fn(),
+      prefetch: vi.fn(),
     }),
+    useSearchParams: () => ({
+      get: vi.fn(),
+    }),
+    usePathname: () => '/species',
   };
 });
 
@@ -75,13 +70,9 @@ describe('Buttons block test', () => {
     expect(buttonsBlock).toBeInTheDocument();
 
     fireEvent.click(within(buttonsBlock).getByText('Next'));
-    expect(routerMock).toHaveBeenCalledWith({
-      query: { type: 'species', page: 2 },
-    });
+    expect(routerMock).toHaveBeenCalledWith('/species?page=2');
 
     fireEvent.click(within(buttonsBlock).getByText('Prev'));
-    expect(routerMock).toHaveBeenCalledWith({
-      query: { type: 'species', page: 1 },
-    });
+    expect(routerMock).toHaveBeenCalledWith('/species?page=1');
   });
 });

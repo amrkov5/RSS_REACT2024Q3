@@ -11,16 +11,15 @@ function ResourceSelector(): ReactNode {
   const dispatch = useDispatch();
   const router = useRouter();
   const [typeFromLS, setTypeFromLS] = useDataFromLS('type');
+  const searchParams = useSearchParams();
 
   const onSetType = (value: string) => {
-    const searchParams = useSearchParams();
-    console.log(searchParams);
-    const newQuery = { ...searchParams, type: value, page: 1 };
+    const newQuery = `/${value}${searchParams.get('search') ? `?search=${searchParams.get('search')}` : ''}`;
     dispatch(clearList());
     dispatch(updateShowLoader(true));
     dispatch(updateIsLoading(true));
     setTypeFromLS(value);
-    router.push(`?${newQuery}`);
+    router.push(newQuery);
   };
 
   return (

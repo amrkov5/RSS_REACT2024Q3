@@ -1,17 +1,8 @@
-import { ReactNode, useContext } from 'react';
-import Link from 'next/link';
-import { ThemeContext } from '../components/ThemeContext';
+import { ReactNode } from 'react';
+import NotFound from '../components/NotFound';
 
-function NotFound(): ReactNode {
-  // const theme = useContext(ThemeContext);
-  return (
-    <>
-      <div className="not-found">
-        <h1>Oops. Not found...</h1>
-      </div>
-      <Link href="/?type=people&page=1">Return to main</Link>
-    </>
-  );
+function NotFoundServer(): ReactNode {
+  return <NotFound />;
 }
 
-export default NotFound;
+export default NotFoundServer;
