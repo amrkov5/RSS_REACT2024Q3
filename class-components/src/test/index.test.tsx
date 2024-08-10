@@ -84,32 +84,4 @@ describe('Main', () => {
       expect(noCards).toBeInTheDocument();
     });
   });
-
-  // it('should draw detailed card after clicking on a card', async () => {
-  //   const { getAllByTestId, getByTestId } = render(
-  //     <Provider store={store}>
-  //       <MemoryRouter initialEntries={[`/RSS_REACT2024Q3/species/card/1`]}>
-  //         <Routes>
-  //           <Route
-  //             path="/RSS_REACT2024Q3/:resourceType"
-  //             element={
-  //               <ConnectError msg={"Couldn't fetch the data..."}>
-  //                 <Main />
-  //               </ConnectError>
-  //             }
-  //           >
-  //             <Route path="card/:id" element={<SingleCard />} />
-  //           </Route>
-  //         </Routes>
-  //       </MemoryRouter>
-  //     </Provider>
-  //   );
-
-  //   await waitFor(() => {
-  //     expect(screen.queryByTestId('loader')).not.toBeInTheDocument();
-  //   });
-
-  //   const cards = getAllByTestId('card');
-  //   fireEvent.click(cards[0]);
-  // });
 });

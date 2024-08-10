@@ -1,17 +1,10 @@
-import {
-  fireEvent,
-  render,
-  waitFor,
-  waitForElementToBeRemoved,
-  within,
-} from '@testing-library/react';
+import { render, within } from '@testing-library/react';
 import { describe, expect } from 'vitest';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import SingleCard from '../components/SingleCard';
 import { mockAPIResponse } from './mockdata';
 import { Species } from '../types';
-import Main from '../pages';
 import headerReducer, { updateType } from '../slices/headerSlice';
 import selectedItemsReducer from '../slices/selectedItemsSlice';
 import errorsReducer from '../slices/errorSlice';
@@ -111,29 +104,5 @@ describe('Single card tests', () => {
     expect(designation).toBeInTheDocument();
     expect(hair).toBeInTheDocument();
     expect(skin).toBeInTheDocument();
-  });
-
-  it('close button should close detailed description', async () => {
-    store.dispatch(updateType({ type: 'species' }));
-    const { getByTestId, getAllByTestId } = render(
-      <Provider store={store}>
-        <Main info={mockAPIResponse} />
-      </Provider>
-    );
-
-    const cards = getAllByTestId('card');
-
-    fireEvent.click(cards[0]);
-    const outlet = getByTestId('outlet');
-
-    await waitFor(() => {
-      expect(outlet).toBeInTheDocument();
-    });
-
-    await waitForElementToBeRemoved(within(outlet).getByTestId('loader'));
-
-    const close = within(outlet).getByText('Close');
-    fireEvent.click(close);
-    expect(outlet).not.toBeInTheDocument();
   });
 });

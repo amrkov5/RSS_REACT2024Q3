@@ -63,23 +63,4 @@ describe('Search input tests', () => {
       'testText'
     );
   });
-
-  // it('should save the entered value to local storage on form submit', () => {
-  //   const { getByTestId } = render(
-  //     <Provider store={store}>
-  //       <MemoryRouter
-  //         initialEntries={[`/RSS_REACT2024Q3/species?search=testText`]}
-  //       >
-  //         <InputBlock />
-  //       </MemoryRouter>
-  //     </Provider>
-  //   );
-  //   const input = getByTestId('search-text');
-  //   const form = getByTestId('search-form');
-
-  //   fireEvent.change(input, { target: { value: 'test' } });
-  //   fireEvent.submit(form);
-
-  //   expect(localStorage.getItem('text')).toBe('test');
-  // });
 });

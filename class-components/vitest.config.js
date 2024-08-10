@@ -8,5 +8,13 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './vitest.setup.js',
     globals: true,
+    coverage: {
+      include: [
+        'src/components/**',
+        'src/pages/**',
+        'src/services/**',
+        'src/slices/**',
+      ],
+    },
   },
 });
