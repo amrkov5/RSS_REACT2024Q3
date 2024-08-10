@@ -1,0 +1,60 @@
+'use client';
+
+import { Component, ReactNode } from 'react';
+import { ErrorBoundaryProps, ErrorBoundaryState } from '../types';
+
+function reload() {
+  window.location.reload();
+}
+
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = { error: false };
+    this.retry = this.retry.bind(this);
+  }
+
+  static getDerivedStateFromError() {
+    return { error: true };
+  }
+
+  retry() {
+    this.setState({ error: false });
+    reload();
+  }
+
+  render(): ReactNode {
+    const { error } = this.state;
+    const { msg, children, fetchError, appError, theme } = this.props;
+    if (error) {
+      return (
+        <div className="error-wrapper" data-theme={theme}>
+          <h2>{msg}</h2>
+          {fetchError && (
+            <button
+              onClick={this.retry}
+              className="try-again-btn"
+              type="button"
+              data-testid="fetch-error"
+            >
+              Try Again
+            </button>
+          )}
+          {appError && (
+            <button
+              onClick={reload}
+              className="try-again-btn"
+              type="button"
+              data-testid="app-error"
+            >
+              Try Again
+            </button>
+          )}
+        </div>
+      );
+    }
+    return children;
+  }
+}
+
+export default ErrorBoundary;
