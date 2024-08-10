@@ -142,7 +142,6 @@ type ErrorBoundaryProps = {
   children: ReactNode;
   fetchError?: boolean;
   appError?: boolean;
-  // fetchErrorFn: () => void;
   theme?: string;
 };
 
