@@ -1,0 +1,8 @@
+.formData {
+  width: 500px;
+  transition: 0.3s ease;
+  background-color: transparent;
+}
+.newData {
+  background-color: aqua;
+}

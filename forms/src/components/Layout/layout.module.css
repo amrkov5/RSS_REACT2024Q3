@@ -1,0 +1,9 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  flex-grow: 0;
+}
+.main {
+  flex-grow: 1;
+}
