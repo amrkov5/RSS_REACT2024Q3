@@ -1,47 +1,59 @@
 import * as yup from 'yup';
+import countryList from '../assets/data';
 
 const schema = yup.object().shape({
   name: yup
     .string()
-    .required('Name is required')
-    .matches(/^[A-Z].*$/, 'Name must start with an uppercase letter'),
+    .matches(/^[A-Z].*$/, 'Name must start with an uppercase letter')
+    .required('Name is required'),
   age: yup
     .number()
+    .typeError('Age must be a number')
+    .transform((value, originalValue) =>
+      String(originalValue).trim() === '' ? undefined : value
+    )
+    .integer('Age must be an integer')
     .required('Age is required')
-    .positive('Age cannot be negative')
-    .integer(),
+    .positive('Age cannot be negative'),
   email: yup
     .string()
-    .required('Email is required')
-    .email('Invalid email address'),
+    .email('Invalid email address')
+    .required('Email is required'),
   password: yup
     .string()
-    .required('Password is required')
     .min(8)
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&*!()_+\-=\\[\]{}|;:'",.<>?]).*$/,
       'Should have 1 uppercase, 1 lowercase, 1 symbol and min 8 symbols'
-    ),
+    )
+    .required('Password is required'),
   rPassword: yup
     .string()
-    .required('Please confirm your password')
-    .oneOf([yup.ref('password')], 'Passwords must match'),
+    .oneOf([yup.ref('password')], 'Passwords must match')
+    .required('Please confirm your password'),
   picData: yup
     .mixed<File>()
-    .required('Image is required')
     .test('is-valid-type', 'Allowed formats: jpg, jpeg, png', (value) => {
       const validateExt = ['image/png', 'image/jpeg'];
-      return validateExt.includes(value.type);
+      if (value) {
+        return validateExt.includes(value.type);
+      }
     })
     .test('is-valid-size', 'Size must be no more than 2MB', (value) => {
       const maxSize = 2097152;
-      return value.size < maxSize;
-    }),
+      if (value) {
+        return value.size < maxSize;
+      }
+    })
+    .required('Image is required'),
   gender: yup
     .string()
     .required('Gender is required')
     .matches(/(male|female)/, 'Please select your gender'),
-  country: yup.string().required('Country is required'),
+  country: yup
+    .string()
+    .oneOf(countryList, 'Enter a valid country')
+    .required('Country is required'),
   conditionsChecked: yup
     .boolean()
     .required('Please accept the Terms and Conditions')

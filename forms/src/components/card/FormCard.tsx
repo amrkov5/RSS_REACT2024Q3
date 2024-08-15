@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FormData, setAsRead } from '../../slice/formSlice';
-import styles from './formData.module.css';
 import { useDispatch } from 'react-redux';
+import styles from './formData.module.css';
 
 export default function FormCard({ data }: { data: FormData }) {
   const [style, setStyle] = useState(`${styles.formData}`);
@@ -21,12 +21,25 @@ export default function FormCard({ data }: { data: FormData }) {
 
   return (
     <div className={style}>
-      <img src={data.picData as string} />
-      <h3>Name: {data.name}</h3>
-      <p>Age:{data.age}</p>
-      <p>E-mail: {data.email}</p>
-      <p>Gender: {data.gender}</p>
-      <p>Country: {data.country}</p>
+      <img src={data.picData as string} className={styles.formImage} />
+      <h3>
+        <span className={styles.headings}>Name:</span> {data.name}
+      </h3>
+      <p className={styles.text}>
+        <span className={styles.headings}>Age:</span> {data.age}
+      </p>
+      <p className={styles.text}>
+        <span className={styles.headings}>E-mail:</span> {data.email}
+      </p>
+      <p className={styles.text}>
+        <span className={styles.headings}>Password:</span> {data.password}
+      </p>
+      <p className={styles.text}>
+        <span className={styles.headings}>Gender:</span> {data.gender}
+      </p>
+      <p className={styles.text}>
+        <span className={styles.headings}>Country:</span> {data.country}
+      </p>
     </div>
   );
 }

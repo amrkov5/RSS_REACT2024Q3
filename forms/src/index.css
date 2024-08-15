@@ -20,7 +20,7 @@
   flex-direction: column;
   flex-grow: 1;
   width: 100%;
-  padding: 20px;
+  padding: 0 20px 020px 20px;
 }
 
 a {

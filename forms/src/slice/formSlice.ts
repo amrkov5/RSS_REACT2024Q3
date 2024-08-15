@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 
 export interface FormData {
   name: string;
-  age: number;
+  age: string;
   email: string;
   password: string;
   rPassword: string;

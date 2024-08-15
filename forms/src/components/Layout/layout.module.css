@@ -1,9 +1,16 @@
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   height: 80px;
   flex-grow: 0;
+  border-bottom: 1px #646cff solid;
+}
+.navigation {
+  display: flex;
+  gap: 20px;
 }
 .main {
   flex-grow: 1;
+  padding-top: 20px;
 }

@@ -11,34 +11,9 @@ import encodeImageFileAsURL from '../../services/uploadFile';
 export default function UncontrolledForm() {
   const [formErrors, setFormErrors] = useState<Record<string, string>>();
   const countries = useSelector(selectCountry);
-  // const formRef = useRef();
-  // const nameData = useRef('');
-  // const ageData = useRef<number>();
-  // const emailData = useRef('');
-  // const rPwdData = useRef('');
-  // const pwdData = useRef('');
-  // const genderData = useRef('');
-  // const TandCData = useRef(false);
   const countryData = useRef('');
-  // const picData = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // const createFormObject = () => {
-  //   const formData: FormData = {
-  //     name: nameData.current,
-  //     age: ageData.current!,
-  //     email: emailData.current,
-  //     password: pwdData.current,
-  //     rPassword: rPwdData.current,
-  //     gender: genderData.current,
-  //     country: countryData.current,
-  //     conditionsChecked: TandCData.current,
-  //     picData: picData.current ? picData.current.files[0] : null,
-  //     isNew: true,
-  //   };
-  //   return formData;
-  // };
 
   const handleUpload = async (file: File) => {
     const data = (await encodeImageFileAsURL(file)) as string;
@@ -64,7 +39,7 @@ export default function UncontrolledForm() {
       (target.genderM.checked && 'male');
     const formData: FormData = {
       name: target.nameInput.value,
-      age: Number(target.ageInput.value),
+      age: target.ageInput.value,
       email: target.emailInput.value,
       password: target.pwdInput.value,
       rPassword: target.repeatPwdInput.value,
@@ -96,30 +71,36 @@ export default function UncontrolledForm() {
     <>
       <h3 className={styles.uncontrolledForm}>Uncontrolled Form</h3>
       <form onSubmit={(event) => onSubmitForm(event)} className={styles.form}>
-        <label htmlFor="nameInput">
+        <label htmlFor="nameInput" className={styles.label}>
           Name:
           <input
             id="nameInput"
             name="nameInput"
             placeholder="Enter your name"
           />
-          {formErrors?.name && <span>{formErrors.name}</span>}
+          {formErrors?.name && (
+            <span className={styles.errMsg}>{formErrors.name}</span>
+          )}
         </label>
-        <label htmlFor="ageInput">
+        <label htmlFor="ageInput" className={styles.label}>
           Age:
           <input id="ageInput" placeholder="Enter your age" name="ageInput" />
-          {formErrors?.age && <span>{formErrors.age}</span>}
+          {formErrors?.age && (
+            <span className={styles.errMsg}>{formErrors.age}</span>
+          )}
         </label>
-        <label htmlFor="emailInput">
+        <label htmlFor="emailInput" className={styles.label}>
           E-mail:
           <input
             id="emailInput"
             name="emailInput"
             placeholder="Enter your email"
           />
-          {formErrors?.email && <span>{formErrors.email}</span>}
+          {formErrors?.email && (
+            <span className={styles.errMsg}>{formErrors.email}</span>
+          )}
         </label>
-        <label htmlFor="pwdInput">
+        <label htmlFor="pwdInput" className={styles.label}>
           Password:
           <input
             type="password"
@@ -127,32 +108,40 @@ export default function UncontrolledForm() {
             name="pwdInput"
             placeholder="Enter your password"
           />
-          {formErrors?.password && <span>{formErrors.password}</span>}
+          {formErrors?.password && (
+            <span className={styles.errMsg}>{formErrors.password}</span>
+          )}
         </label>
-        <label htmlFor="repeatPwdInput">
+        <label htmlFor="repeatPwdInput" className={styles.label}>
           Repeat password:
           <input
             type="password"
             id="repeatPwdInput"
             name="repeatPwdInput"
-            placeholder="Enter your password"
+            placeholder="Confirm the password"
           />
-          {formErrors?.rPassword && <span>{formErrors.rPassword}</span>}
+          {formErrors?.rPassword && (
+            <span className={styles.errMsg}>{formErrors.rPassword}</span>
+          )}
         </label>
-        <div>
+        <div className={styles.label}>
           Choose your gender:
-          <label htmlFor="male">
-            Male:
-            <input type="radio" name="genderM" id="male" value="male" />
-          </label>
-          <label htmlFor="female">
-            Female:
-            <input type="radio" name="genderF" value="female" id="female" />
-          </label>
-          {formErrors?.gender && <span>{formErrors.gender}</span>}
+          <div className={styles.genderWrapper}>
+            <label htmlFor="male">
+              Male:
+              <input type="radio" name="genderM" id="male" value="male" />
+            </label>
+            <label htmlFor="female">
+              Female:
+              <input type="radio" name="genderF" value="female" id="female" />
+            </label>
+          </div>
+          {formErrors?.gender && (
+            <span className={styles.errMsg}>{formErrors.gender}</span>
+          )}
         </div>
 
-        <label htmlFor="countrySelector">
+        <label htmlFor="countrySelector" className={styles.label}>
           <input
             id="countrySelector"
             name="countrySelector"
@@ -168,20 +157,31 @@ export default function UncontrolledForm() {
                 <option value={el} key={el} />
               ))}
           </datalist>
-          {formErrors?.country && <span>{formErrors.country}</span>}
-        </label>
-        <label htmlFor="picUpload">
-          Upload your picture:
-          <input type="file" name="picUpload" id="picUpload" />
-          {formErrors?.picData && <span>{formErrors.picData}</span>}
-        </label>
-        <label htmlFor="tAndC">
-          <input type="checkbox" name="conditions" id="tAndC" />I agree with T&C
-          {formErrors?.conditionsChecked && (
-            <span>{formErrors.conditionsChecked}</span>
+          {formErrors?.country && (
+            <span className={styles.errMsg}>{formErrors.country}</span>
           )}
         </label>
-        <button>Submit form</button>
+        <label htmlFor="picUpload" className={styles.label}>
+          Upload your picture:
+          <input
+            type="file"
+            name="picUpload"
+            id="picUpload"
+            className={styles.fileInput}
+          />
+          {formErrors?.picData && (
+            <span className={styles.errMsg}>{formErrors.picData}</span>
+          )}
+        </label>
+        <label htmlFor="tAndC" className={styles.tcLabel}>
+          <input type="checkbox" name="conditions" id="tAndC" />I agree with T&C
+          {formErrors?.conditionsChecked && (
+            <span className={styles.errMsg}>
+              {formErrors.conditionsChecked}
+            </span>
+          )}
+        </label>
+        <button className={styles.submitBtn}>Submit form</button>
       </form>
     </>
   );
