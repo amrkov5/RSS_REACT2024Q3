@@ -32,17 +32,17 @@ const schema = yup.object().shape({
     .oneOf([yup.ref('password')], 'Passwords must match')
     .required('Please confirm your password'),
   picData: yup
-    .mixed<File>()
+    .mixed<FileList>()
     .test('is-valid-type', 'Allowed formats: jpg, jpeg, png', (value) => {
       const validateExt = ['image/png', 'image/jpeg'];
-      if (value) {
-        return validateExt.includes(value.type);
+      if (value && value.length > 0) {
+        return validateExt.includes(value[0].type);
       }
     })
-    .test('is-valid-size', 'Size must be no more than 2MB', (value) => {
+    .test('is-valid-size', 'Size must be less than 2MB', (value) => {
       const maxSize = 2097152;
-      if (value) {
-        return value.size < maxSize;
+      if (value && value.length > 0) {
+        return value[0].size < maxSize;
       }
     })
     .required('Image is required'),

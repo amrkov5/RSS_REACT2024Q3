@@ -4,16 +4,16 @@ import { nanoid } from 'nanoid';
 
 export interface FormData {
   name: string;
-  age: string;
+  age: number | string;
   email: string;
   password: string;
   rPassword: string;
   gender: string;
   country: string;
   conditionsChecked: boolean;
-  isNew: boolean;
+  isNew?: boolean;
   id?: string;
-  picData: string | File;
+  picData: string | FileList;
 }
 
 export interface FormState {

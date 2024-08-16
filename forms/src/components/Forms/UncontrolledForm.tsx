@@ -6,7 +6,7 @@ import schema from '../../services/validation';
 import { addData, FormData } from '../../slice/formSlice';
 import { useNavigate } from 'react-router-dom';
 import { ValidationError } from 'yup';
-import encodeImageFileAsURL from '../../services/uploadFile';
+import handleUpload from '../../services/uploadFile';
 
 export default function UncontrolledForm() {
   const [formErrors, setFormErrors] = useState<Record<string, string>>();
@@ -15,10 +15,10 @@ export default function UncontrolledForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleUpload = async (file: File) => {
-    const data = (await encodeImageFileAsURL(file)) as string;
-    return data;
-  };
+  // const handleUpload = async (FileList: FileList) => {
+  //   const data = (await encodeImageFileAsURL(FileList[0])) as string;
+  //   return data;
+  // };
 
   const onSubmitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -28,31 +28,28 @@ export default function UncontrolledForm() {
       emailInput: { value: string };
       pwdInput: { value: string };
       repeatPwdInput: { value: string };
-      genderM: { value: string; checked: boolean };
-      genderF: { value: string; checked: boolean };
+      gender: { value: string; checked: boolean };
       countrySelector: { value: string };
-      picUpload: { files: File[] | [] };
+      picUpload: { files: FileList };
       conditions: { checked: boolean };
     };
-    const gender =
-      (target.genderF.checked && 'female') ||
-      (target.genderM.checked && 'male');
+
     const formData: FormData = {
       name: target.nameInput.value,
       age: target.ageInput.value,
       email: target.emailInput.value,
       password: target.pwdInput.value,
       rPassword: target.repeatPwdInput.value,
-      gender: gender ? gender : '',
+      gender: target.gender.value,
       country: target.countrySelector.value,
       conditionsChecked: target.conditions.checked,
-      picData: target.picUpload.files[0],
+      picData: target.picUpload.files,
       isNew: true,
     };
     await schema
       .validate(formData, { abortEarly: false })
       .then(async () => {
-        const encFile = await handleUpload(formData.picData as File);
+        const encFile = await handleUpload(formData.picData as FileList);
         dispatch(addData({ ...formData, picData: encFile }));
         navigate('/');
       })
@@ -129,11 +126,11 @@ export default function UncontrolledForm() {
           <div className={styles.genderWrapper}>
             <label htmlFor="male">
               Male:
-              <input type="radio" name="genderM" id="male" value="male" />
+              <input type="radio" name="gender" id="male" value="male" />
             </label>
             <label htmlFor="female">
               Female:
-              <input type="radio" name="genderF" value="female" id="female" />
+              <input type="radio" name="gender" value="female" id="female" />
             </label>
           </div>
           {formErrors?.gender && (
