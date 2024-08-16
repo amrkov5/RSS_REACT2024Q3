@@ -1,13 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import styles from './forms.module.css';
-import schema from '../../services/validation';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCountry } from '../../slice/countrySlice';
 import { useState } from 'react';
-import { addData, FormData } from '../../slice/formSlice';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import schema from '../../services/validation';
+import { selectCountry } from '../../slice/countrySlice';
+import { addData, FormData } from '../../slice/formSlice';
 import handleUpload from '../../services/uploadFile';
+import styles from './forms.module.css';
 
 export default function ControlledForm() {
   const countries = useSelector(selectCountry);

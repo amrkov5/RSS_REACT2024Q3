@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
 import { nanoid } from 'nanoid';
+
+import { RootState } from '../store';
 
 export interface FormData {
   name: string;

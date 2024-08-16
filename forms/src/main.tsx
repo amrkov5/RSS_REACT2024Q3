@@ -1,13 +1,14 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import './index.css';
+import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import Layout from './components/Layout/Layout.tsx';
 import Main from './components/Main/Main.tsx';
 import UncontrolledForm from './components/Forms/UncontrolledForm.tsx';
 import ControlledForm from './components/Forms/ControlledForm.tsx';
-import { Provider } from 'react-redux';
 import store from './store.ts';
+import './index.css';
 
 const router = createBrowserRouter([
   {

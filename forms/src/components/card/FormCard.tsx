@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { FormData, setAsRead } from '../../slice/formSlice';
 import { useDispatch } from 'react-redux';
+
+import { FormData, setAsRead } from '../../slice/formSlice';
 import styles from './formData.module.css';
 
 export default function FormCard({ data }: { data: FormData }) {

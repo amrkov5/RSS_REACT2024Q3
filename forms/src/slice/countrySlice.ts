@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 import countryList from '../assets/data';
 import { RootState } from '../store';
 

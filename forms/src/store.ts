@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import countryReducer from './slice/countrySlice';
 import formReducer, { FormState } from './slice/formSlice';
 

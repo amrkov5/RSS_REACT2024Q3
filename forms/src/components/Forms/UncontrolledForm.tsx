@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
-import styles from './forms.module.css';
-import { selectCountry } from '../../slice/countrySlice';
 import { FormEvent, useRef, useState } from 'react';
-import schema from '../../services/validation';
-import { addData, FormData } from '../../slice/formSlice';
 import { useNavigate } from 'react-router-dom';
 import { ValidationError } from 'yup';
+
+import { selectCountry } from '../../slice/countrySlice';
+import schema from '../../services/validation';
+import { addData, FormData } from '../../slice/formSlice';
 import handleUpload from '../../services/uploadFile';
+import styles from './forms.module.css';
 
 export default function UncontrolledForm() {
   const [formErrors, setFormErrors] = useState<Record<string, string>>();
@@ -14,11 +15,6 @@ export default function UncontrolledForm() {
   const countryData = useRef('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // const handleUpload = async (FileList: FileList) => {
-  //   const data = (await encodeImageFileAsURL(FileList[0])) as string;
-  //   return data;
-  // };
 
   const onSubmitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
