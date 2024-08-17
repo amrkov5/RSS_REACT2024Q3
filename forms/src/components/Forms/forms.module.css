@@ -1,0 +1,56 @@
+h3 {
+  text-align: center;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0 auto;
+  width: 400px;
+}
+.genderWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 170px;
+}
+.label,
+.tcLabel {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+.fileInput {
+  width: 180px;
+}
+.tcLabel {
+  justify-content: start;
+}
+.errMsg {
+  position: absolute;
+  left: 2px;
+  top: 24px;
+  font-size: 10px;
+  color: red;
+}
+.submitBtn {
+  margin-top: 25px;
+  width: 150px;
+  margin: 0 auto;
+}
+.weak,
+.normal,
+.strong {
+  position: absolute;
+  top: 24px;
+  right: 2px;
+  font-size: 10px;
+}
+.weak {
+  color: red;
+}
+.normal {
+  color: orange;
+}
+.strong {
+  color: greenyellow;
+}
