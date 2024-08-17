@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,10 +9,16 @@ import { selectCountry } from '../../slice/countrySlice';
 import { addData, FormData } from '../../slice/formSlice';
 import handleUpload from '../../services/uploadFile';
 import styles from './forms.module.css';
+import {
+  addStrengthStyle,
+  passStrengthValidation,
+  showStrength,
+} from '../../services/passStrength';
 
 export default function ControlledForm() {
   const countries = useSelector(selectCountry);
   const [countryInput] = useState('');
+  const [passStrength, setPassStrength] = useState(0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,7 +26,7 @@ export default function ControlledForm() {
     register,
     handleSubmit,
     formState: { errors, isValid },
-    reset,
+    watch,
   } = useForm({
     resolver: yupResolver(schema),
     mode: 'onChange',
@@ -30,8 +36,11 @@ export default function ControlledForm() {
     const encFile = await handleUpload(data.picData as FileList);
     dispatch(addData({ ...data, picData: encFile, isNew: true }));
     navigate('/');
-    reset();
   };
+  const passwordValue = watch('password');
+  useEffect(() => {
+    setPassStrength(passStrengthValidation(passwordValue || ''));
+  }, [passwordValue]);
 
   return (
     <>
@@ -77,7 +86,13 @@ export default function ControlledForm() {
             id="pwdInput"
             placeholder="Enter your password"
             {...register('password')}
+            // onChange={(e) => handlePassChange(e)}
           />
+          {!!passStrength && (
+            <span className={addStrengthStyle(passStrength)}>
+              {showStrength(passStrength)}
+            </span>
+          )}
           {errors.password?.message && (
             <span className={styles.errMsg}>{errors.password.message}</span>
           )}

@@ -8,13 +8,63 @@ import schema from '../../services/validation';
 import { addData, FormData } from '../../slice/formSlice';
 import handleUpload from '../../services/uploadFile';
 import styles from './forms.module.css';
+import {
+  addStrengthStyle,
+  passStrengthValidation,
+  showStrength,
+} from '../../services/passStrength';
 
 export default function UncontrolledForm() {
   const [formErrors, setFormErrors] = useState<Record<string, string>>();
+  const [passStrength, setPassStrength] = useState(0);
   const countries = useSelector(selectCountry);
   const countryData = useRef('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // const passStrengthValidation = (data: string) => {
+  //   let strength = 0;
+
+  //   if (/[A-Z]/.test(data)) {
+  //     strength += 1;
+  //   }
+  //   if (/[a-z]/.test(data)) {
+  //     strength += 1;
+  //   }
+  //   if (/[0-9]/.test(data)) {
+  //     strength += 1;
+  //   }
+  //   if (/[!@#$%^&*()_+\[\]\{\}><?/.,|]/.test(data)) {
+  //     strength += 1;
+  //   }
+  //   if (data.length < 8 && data.length > 0 && strength > 1) {
+  //     strength -= 1;
+  //   } else if (data.length >= 8) {
+  //     strength += 1;
+  //   }
+
+  //   setPassStrength(strength);
+  // };
+
+  // const showStrength = () => {
+  //   if (passStrength < 3) {
+  //     return 'Weak';
+  //   }
+  //   if (passStrength < 5) {
+  //     return 'Normal';
+  //   }
+  //   return 'Strong';
+  // };
+
+  // const addStrengthStyle = () => {
+  //   if (passStrength < 3) {
+  //     return `${styles.weak}`;
+  //   }
+  //   if (passStrength < 5) {
+  //     return `${styles.normal}`;
+  //   }
+  //   return `${styles.strong}`;
+  // };
 
   const onSubmitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -100,7 +150,15 @@ export default function UncontrolledForm() {
             id="pwdInput"
             name="pwdInput"
             placeholder="Enter your password"
+            onChange={(e) =>
+              setPassStrength(passStrengthValidation(e.target.value))
+            }
           />
+          {!!passStrength && (
+            <span className={addStrengthStyle(passStrength)}>
+              {showStrength(passStrength)}
+            </span>
+          )}
           {formErrors?.password && (
             <span className={styles.errMsg}>{formErrors.password}</span>
           )}

@@ -37,3 +37,20 @@ h3 {
   width: 150px;
   margin: 0 auto;
 }
+.weak,
+.normal,
+.strong {
+  position: absolute;
+  top: 24px;
+  right: 2px;
+  font-size: 10px;
+}
+.weak {
+  color: red;
+}
+.normal {
+  color: orange;
+}
+.strong {
+  color: greenyellow;
+}
